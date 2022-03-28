@@ -1,0 +1,38 @@
+.heroImage {
+  width: 100%;
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../assets/home-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.heroText {
+  color: white;
+  width: 50%;
+  margin: auto;
+  margin-top: 14%;
+  text-align: center;
+}
+
+.heroHeading {
+  font-size: 4rem;
+  font-weight: 400;
+}
+
+.heroBody {
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.heroButton {
+  background-color: #75a5ff;
+  color: white;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border-radius: 35px;
+  border: none;
+  margin-top: 2rem;
+}
