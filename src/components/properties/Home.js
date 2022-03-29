@@ -1,6 +1,8 @@
 import React from "react";
 import Menu from "../Menu";
 import "../../css/Home.css";
+import { ReactComponent as ServiceLogo } from "../../assets/Vector.svg";
+import Footer from "../Footer";
 
 function Home() {
   return (
@@ -15,6 +17,109 @@ function Home() {
           <button className="heroButton">Buy Now</button>
         </div>
       </div>
+      <div className="productServices">
+        <p>A Better Home Buying And Selling Experience Starts Here</p>
+      </div>
+
+      {/* Company services */}
+      <div className="services">
+        <div>
+          <div className="serviceIconDiv">
+            <ServiceLogo className="serviceIcon" />
+          </div>
+          <h4>Buy</h4>
+          <p>Know the real going price for the property you want</p>
+          <p>Get Pre-Approved Home Loan you can avail</p>
+          <p className="text-primary serviceCardLink">{"Buy Homes >"}</p>
+        </div>
+        <div>
+          <div className="serviceIconDiv">
+            <ServiceLogo className="serviceIcon" />
+          </div>
+          <h4>Sell</h4>
+          <p>Sell your home for the highest possible price</p>
+          <p>Free Professional Photoshoot. Access to 15 Lac Buyers & Tenants</p>
+          <p className="text-primary serviceCardLink">{"Sell Homes >"}</p>
+        </div>
+        <div>
+          <div className="serviceIconDiv">
+            <ServiceLogo className="serviceIcon" />
+          </div>
+          <h4>Rent</h4>
+          <p>Get rent agreement absolutely free. Affordable Localities</p>
+          <p>Sell on your terms and at a price you want</p>
+          <p className="text-primary serviceCardLink">{"Rent Homes >"}</p>
+        </div>
+      </div>
+
+      {/* Testimonial */}
+      <div className="testimonial">
+        <h2 className="testimonialHeading text-center">Testimonial</h2>
+
+        <div className="testimonialCardDiv">
+          <div className="testimonialCard">
+            <img
+              alt="testimonial"
+              className="testimonialImage"
+              src="https://images.unsplash.com/photo-1512484776495-a09d92e87c3b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTJ8MTcyOTI1OHx8ZW58MHx8fHw%3D&w=1000&q=80"
+            />
+            <p>
+              WOW! Thank you so much! I will leave a review mentioning your
+              incredible customer service and how satisfied I am with your
+              products.
+            </p>
+          </div>
+
+          <div className="testimonialCard">
+            <img
+              className="testimonialImage"
+              src="http://www.zimhealth.org/images/member-4.jpg"
+              alt="testimonial"
+            />
+            <p>
+              WOW! Thank you so much! I will leave a review mentioning your
+              incredible customer service and how satisfied I am with your
+              products.
+            </p>
+          </div>
+
+          <div className="testimonialCard">
+            <img
+              alt="testimonial"
+              className="testimonialImage"
+              src="https://bizencyclopedia.com/assets/uploads/user_profiles/09c3d11d50de29f0b7be14a71b584547.jpg"
+            />
+            <p>
+              WOW! Thank you so much! I will leave a review mentioning your
+              incredible customer service and how satisfied I am with your
+              products.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Latest Properties */}
+      <div>
+        <h3 className="latestPropertyText">Latest Properties</h3>
+        <div className="latestPropertyDiv">
+          <img
+            alt="property"
+            className="latestPropertyImage"
+            src={`https://images.ctfassets.net/3s5io6mnxfqz/2IW4MOaC7MJObCYclek03J/b6b6f6d963f0413559d9677c50ee3a49/what-is-a-studio-apartment.jpeg?fm=jpg&w=900&fl=progressive`}
+          />
+          <img
+            alt="property"
+            className="latestPropertyImage"
+            src={`https://images.ctfassets.net/3s5io6mnxfqz/2IW4MOaC7MJObCYclek03J/b6b6f6d963f0413559d9677c50ee3a49/what-is-a-studio-apartment.jpeg?fm=jpg&w=900&fl=progressive`}
+          />
+        </div>
+        <p className="text-primary text-center latestPropertyLink">
+          {"Explore more >"}
+        </p>
+      </div>
+
+      {/* Footer */}
+      <Footer />
     </>
   );
 }

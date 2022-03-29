@@ -15,9 +15,3 @@
 .navbarBg {
   background-color: none;
 }
-
-@media only screen and (max-width: 768px) {
-  .navbarBg {
-    background-color: #75a5ff;
-  }
-}
