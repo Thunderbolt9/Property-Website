@@ -1,0 +1,11 @@
+.sell-form-container {
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 0.7em;
+}
+
+@media only screen and (max-width: 768px) {
+  .vertical-spacing {
+    gap: 15px;
+  }
+}

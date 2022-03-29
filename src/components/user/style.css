@@ -1,0 +1,13 @@
+/* Common styles for Login and Register Components*/
+
+.auth-form-container {
+  padding: 50px 12px;
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.auth-button {
+  min-height: 30px;
+  min-width: 130px;
+  border-radius: 20px;
+}
