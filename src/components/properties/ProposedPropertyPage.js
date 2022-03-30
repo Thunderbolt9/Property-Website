@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Pagination, Card, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Menu from "../Menu";
+import Footer from "../Footer";
+import "../../css/ProposedProperty.css";
 
 function ProposedPropertyPage() {
   const [posts, setPosts] = useState([]);
@@ -36,24 +39,32 @@ function ProposedPropertyPage() {
 
   return (
     <>
+      <Menu />
+      <br />
+      <br />
       <h3 className="text-center">Posted Properties</h3>
-      <br/>
-      <div style={{ width: '50%', margin: 'auto' }}>
-      <Row xs={1} md={2} className="g-4">
+      <br />
+      <Row xs={1} md={2} className="propertyDiv">
         {currentPosts.map((post) => (
           <Col key={post.id}>
-            <Card style={{ width: "18rem" }}>
+            <Card className="propertyImage">
               <Card.Img variant="top" src={post.url} />
-              
-              <Card.ImgOverlay style={{ margin: "6.5rem 5.5rem" }}>
-                <Button variant="light" size="lg" style={{ color: '#75A5FF'}}>House</Button>
-              </Card.ImgOverlay>
+              <div className="text-center">
+                <Card.ImgOverlay className="imageOverlay">
+                  <Button
+                    variant="light"
+                    size="lg"
+                    style={{ color: "#75A5FF" }}
+                  >
+                    House
+                  </Button>
+                </Card.ImgOverlay>
+              </div>
             </Card>
           </Col>
         ))}
       </Row>
-      </div>
-      <br/>
+      <br />
       <Pagination style={{ justifyContent: "center" }}>
         {pageNumbers.map((number) => {
           return (
@@ -63,6 +74,7 @@ function ProposedPropertyPage() {
           );
         })}
       </Pagination>
+      <Footer />
     </>
   );
 }
