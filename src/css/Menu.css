@@ -1,0 +1,17 @@
+.logo {
+  font-size: 2.188rem;
+  font-weight: bold;
+}
+
+.navtext {
+  font-size: 1.3rem;
+  margin-right: 1.2rem;
+}
+
+.navtext:hover {
+  font-weight: bold;
+}
+
+.navbarBg {
+  background-color: none;
+}
