@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import "./SellerPage.css";
+import "../../css/SellerPage.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Row, Col } from "react-bootstrap";

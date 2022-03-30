@@ -4,6 +4,7 @@
   padding: 50px 12px;
   max-width: 450px;
   margin: 0 auto;
+  min-height: 100vh;
 }
 
 .auth-button {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./PropertyViewPage.css";
+import "../../css/PropertyViewPage.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -9,7 +9,7 @@ import Carousel from "react-bootstrap/Carousel";
 
 function PropertyViewPage() {
   return (
-    <Container className="d-flex flex-column gap-3 pt-3 pb-4">
+    <Container className="d-flex flex-column gap-3 pt-4 pb-4">
       <Row>
         <Col>
           <h3 className="p-0 m-0">Quantiphi</h3>
