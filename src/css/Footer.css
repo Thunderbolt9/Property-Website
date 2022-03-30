@@ -1,0 +1,43 @@
+.footer {
+  background-color: #75a5ff;
+  padding: 4rem;
+}
+
+.logo {
+  font-size: 2.188rem;
+  font-weight: bold;
+}
+
+.footerContent {
+  color: white;
+  width: 50%;
+}
+
+.footerDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerButton {
+  padding: 0.4rem 1.2rem;
+  background-color: #fff7d6;
+  border-color: #fff7d6;
+  border: none;
+}
+
+@media only screen and (max-width: 500px) {
+  .footerDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .footerContent {
+    width: 100%;
+  }
+
+  .footer {
+    background-color: #75a5ff;
+    padding: 1.5rem;
+  }
+}
