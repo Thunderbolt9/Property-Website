@@ -24,15 +24,19 @@ function App() {
   useEffect(() => {
     //on page refresh fetch user store i in redux state
     async function refreshUser() {
-      const res = await axios.get(`${API_URL}/api/v1/user/current_user`, {
-        withCredentials: true,
-      });
-      store.dispatch({
-        type: "userAdded",
-        payload: {
-          user: res.data.user,
-        },
-      });
+      try {
+        const res = await axios.get(`${API_URL}/api/v1/user/current_user`, {
+          withCredentials: true,
+        });
+        store.dispatch({
+          type: "userAdded",
+          payload: {
+            user: res.data.user,
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
       setloading(false);
     }
     refreshUser();
