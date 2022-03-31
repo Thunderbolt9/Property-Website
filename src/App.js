@@ -8,6 +8,7 @@ import SellerPage from "./components/properties/SellerPage";
 import ContactedProperties from "./components/properties/ContactedProperty";
 import ProposedProperties from "./components/properties/ProposedPropertyPage";
 import PropertyViewPage from "./components/properties/PropertyViewPage";
+import AdminPropertyPage from "./components/admin/AdminPropertyPage";
 
 function App() {
   return (
@@ -20,7 +21,8 @@ function App() {
         <Route path="/sellerpage" element={<SellerPage />} />
         <Route path="/contactedproperties" element={<ContactedProperties />} />
         <Route path="/proposedproperties" element={<ProposedProperties />} />
-        <Route path="/propertyviewpage" element={<PropertyViewPage />} />      
+        <Route path="/propertyviewpage" element={<PropertyViewPage />} />  
+        <Route path="/adminpropertypage" element={<AdminPropertyPage />} />    
       </Routes>
     </BrowserRouter>
   );

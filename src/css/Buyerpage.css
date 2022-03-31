@@ -1,0 +1,62 @@
+@media only screen and (max-width: 500px) {
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 1rem;
+  }
+
+  .Img {
+    width: 20rem;
+  }
+
+  .imgoverlay {
+    margin-top: 7rem;
+    text-align: "center";
+   top: "290px";
+  }
+  /* .setbutton{
+  text-align: center;
+  color: #75A5FF;
+  border-radius: 5rem;
+  width: 10rem;
+  height: 3rem;
+  margin-top: 2rem;
+  margin-left: 5rem;
+  background-color: white;
+    border-color: #75A5FF;
+  } */
+  .card {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 1rem;
+  }
+
+  .Img {
+    width: 34rem;
+  }
+  .page{
+    justify-content: center ;
+    margin:4rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+}
+.setbutton{
+  text-align: center;
+  color: #75A5FF;
+  border-radius: 5rem;
+  width: 10rem;
+  height: 3rem;
+  margin-top: 290px;
+  margin-left: 14rem;
+  background-color: white;
+    border-color: #75A5FF;
+  }
