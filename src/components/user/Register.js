@@ -1,26 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import authService from "../../services/authService";
+import { useNavigate, Navigate } from "react-router-dom";
+import { AuthContext } from "../../App";
+import store from "../../redux/store";
 import "../../css/auth.css";
 
 function Register() {
   const initialValues = {
     name: "",
-    phoneno: "",
+    phone: "",
     email: "",
     password: "",
-    confirm_password: "",
+    cpassword: "",
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
+  const [serverError, setServerError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const currentUser = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   // Form data avaialble here
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+      async function registerUser() {
+        const res = await authService.register(formValues);
+        console.log(res.error);
+        if (res.error) {
+          setServerError({ server_error: res.error });
+        } else {
+          store.dispatch({
+            type: "userAdded",
+            payload: {
+              user: res.user,
+            },
+          });
+          navigate("/sellerpage");
+        }
+      }
+      registerUser();
     }
   }, [formErrors]);
+
+  if (currentUser) {
+    return <Navigate to="/login"></Navigate>;
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,6 +60,7 @@ function Register() {
     setIsSubmit(true);
   };
 
+  //validate form values
   const validate = (values) => {
     const errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -45,10 +73,10 @@ function Register() {
     } else if (!emailRegex.test(values.email)) {
       errors.email = "This is not a valid email format!";
     }
-    if (!values.phoneno) {
-      errors.phoneno = "Phoneno is required!*";
-    } else if (!phoneRegex.test(values.phoneno)) {
-      errors.phoneno = "This is not a valid phone format!";
+    if (!values.phone) {
+      errors.phone = "phone is required!*";
+    } else if (!phoneRegex.test(values.phone)) {
+      errors.phone = "This is not a valid phone format!";
     }
     if (!values.password) {
       errors.password = "Password is required!*";
@@ -57,10 +85,10 @@ function Register() {
     } else if (values.password.length > 10) {
       errors.password = "Password cannot exceed more than 10 characters";
     }
-    if (values.password !== values.confirm_password) {
-      errors.confirm_password = "Password don't match";
-    } else if (!values.confirm_password) {
-      errors.confirm_password = "Confirmed password required!*";
+    if (values.password !== values.cpassword) {
+      errors.cpassword = "Password don't match";
+    } else if (!values.cpassword) {
+      errors.cpassword = "Confirmed password required!*";
     }
     return errors;
   };
@@ -108,13 +136,13 @@ function Register() {
             type="text"
             size="lg"
             placeholder="Phone No"
-            name="phoneno"
-            value={formValues.phoneno}
+            name="phone"
+            value={formValues.phone}
             onChange={handleChange}
-            isInvalid={formErrors.phoneno ? true : false}
+            isInvalid={formErrors.phone ? true : false}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            {formErrors.phoneno}
+            {formErrors.phone}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -138,16 +166,16 @@ function Register() {
             type="password"
             size="lg"
             placeholder="Confirm Password"
-            name="confirm_password"
-            value={formValues.confirm_password}
+            name="cpassword"
+            value={formValues.cpassword}
             onChange={handleChange}
-            isInvalid={formErrors.confirm_password ? true : false}
+            isInvalid={formErrors.cpassword ? true : false}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            {formErrors.confirm_password}
+            {formErrors.cpassword}
           </Form.Control.Feedback>
         </Form.Group>
-
+        <div className="text-danger">{serverError.server_error}</div>
         {/* <Form.Group className="input-lg">
           <Form.Check
             size="lg"

@@ -1,3 +1,7 @@
+* {
+  font-family: cursive;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -24,10 +28,17 @@ h3,
 h4,
 h5,
 h6 {
-  padding: 0;
   margin: 0;
 }
 
 .form-bg {
   background: #f4f4f4;
+}
+
+.spinner {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

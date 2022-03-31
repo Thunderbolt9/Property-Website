@@ -1,20 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import authService from "../../services/authService";
+import { useNavigate, Navigate } from "react-router";
 import "../../css/auth.css";
+import { AuthContext } from "../../App";
+import store from "../../redux/store";
 
-function Login() {
+function Login(props) {
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [serverError, setServerError] = useState({});
+  const navigate = useNavigate();
+  const currentUser = useContext(AuthContext);
 
   // Form data avaialble here
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+      async function loginUser() {
+        const res = await authService.login(formValues);
+        if (res.error) {
+          setServerError({ server_error: res.error });
+        } else {
+          store.dispatch({
+            type: "userAdded",
+            payload: {
+              user: res.user,
+            },
+          });
+          navigate("/sellerpage");
+        }
+      }
+      loginUser();
     }
   }, [formErrors]);
+
+  if (currentUser) {
+    console.log("currentUser", currentUser);
+    return <Navigate to="/sellerpage"></Navigate>;
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,6 +53,7 @@ function Login() {
     setIsSubmit(true);
   };
 
+  // validate form values
   const validate = (values) => {
     const errors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
@@ -81,6 +108,8 @@ function Login() {
             {formErrors.password}
           </Form.Control.Feedback>
         </Form.Group>
+
+        <div className="text-danger">{serverError.server_error}</div>
 
         <div className="text-center">
           <Button

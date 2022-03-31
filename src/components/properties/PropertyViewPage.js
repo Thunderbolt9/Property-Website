@@ -9,14 +9,16 @@ import Carousel from "react-bootstrap/Carousel";
 
 function PropertyViewPage() {
   return (
-    <Container className="d-flex flex-column gap-3 pt-4 pb-4">
+    <Container className="container-main">
       <Row>
         <Col>
-          <h3 className="p-0 m-0">Quantiphi</h3>
+          <h3>Quantiphi</h3>
         </Col>
       </Row>
       <Row>
-        <Col>Mumbai</Col>
+        <Col>
+          <h6>Mumbai</h6>
+        </Col>
       </Row>
       <Row>
         <Col>
@@ -64,44 +66,44 @@ function PropertyViewPage() {
           </Carousel>
         </Col>
       </Row>
-      <Row className="pt-2">
+      <Row className="pt-2 gap-5">
         <Col>
           <Row>
             <Col>
               <h3>Quick Summery</h3>
             </Col>
           </Row>
-          <Row className="mt-3">
+          <Row className="property-info">
             <Col>
               <table>
                 <tbody>
                   <tr>
                     <td align="left">
-                      <h5>Price:</h5>
+                      <span className="quick-summery-heading">Price:</span>
                     </td>
                     <td align="right">1 crore</td>
                   </tr>
                   <tr>
                     <td align="left">
-                      <h5>Location:</h5>
+                      <span className="quick-summery-heading">Location:</span>
                     </td>
                     <td align="right">Mumbai</td>
                   </tr>
                   <tr>
                     <td align="left">
-                      <h5>Type:</h5>
+                      <span className="quick-summery-heading">Type:</span>
                     </td>
                     <td align="right">Mumbai</td>
                   </tr>
                   <tr>
                     <td align="left">
-                      <h5>City:</h5>
+                      <span className="quick-summery-heading">City:</span>
                     </td>
                     <td align="right">Mumbai</td>
                   </tr>
                   <tr>
                     <td align="left">
-                      <h5>Area:</h5>
+                      <span className="quick-summery-heading">Area:</span>
                     </td>
                     <td align="right">Mumbai</td>
                   </tr>
@@ -110,15 +112,15 @@ function PropertyViewPage() {
             </Col>
           </Row>
         </Col>
-        <Col lg={1} xs={12}>
+        {/* <Col lg={1} xs={12}>
           <div style={{ height: "15px" }}></div>
-        </Col>
+        </Col> */}
         {/*for spacing*/}
-        <Col xs={12} md={12} lg={8}>
+        <Col xs={12} md={12} lg={9}>
           <Row>
             <h3>Property Description</h3>
           </Row>
-          <Row className="mt-3">
+          <Row className="property-info">
             <Col>
               <p>
                 Contrary to popular belief, Lorem Ipsum is not simply random
@@ -144,14 +146,18 @@ function PropertyViewPage() {
           </Row>
         </Col>
       </Row>
-      <Row>
+      <Row className="mt-3">
         <Col>
           <h3>Contact Seller</h3>
         </Col>
       </Row>
       <Row>
         <Col>
-          <Button variant="outline-primary" size="lg">
+          <Button
+            className="contact-button"
+            variant="outline-primary"
+            size="lg"
+          >
             Contact
           </Button>
         </Col>

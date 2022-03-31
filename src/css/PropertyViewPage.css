@@ -1,17 +1,45 @@
+.container-main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  padding-bottom: 50px;
+  gap: 15px;
+}
+
+.contact-button {
+  min-height: 30px;
+  min-width: 130px;
+  border-radius: 20px;
+}
+
+.property-info {
+  margin-top: 1.5rem;
+}
+
+p {
+  line-height: 1.8rem;
+}
+
 table {
   width: 100%;
+}
+
+.quick-summery-heading {
+  font-size: 1.1rem;
+  font-weight: 500;
 }
 
 th,
 td {
   padding-bottom: 15px;
+  line-height: 1.8rem;
 }
 
 img {
   height: 600px;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 992px) {
   img {
     height: 100%;
   }

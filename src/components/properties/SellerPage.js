@@ -1,8 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../css/SellerPage.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Row, Col } from "react-bootstrap";
+import store from "../../redux/store";
+import axios from "axios";
 
 function SellerPage() {
   const initialValues = {
@@ -56,6 +58,20 @@ function SellerPage() {
       filethree.current.click();
     }
   };
+
+  async function handleLogout() {
+    await axios.post(
+      "http://localhost:4000/api/v1/user/logout",
+      {},
+      { withCredentials: true }
+    );
+    store.dispatch({
+      type: "userDeleted",
+      payload: {
+        user: null,
+      },
+    });
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -365,6 +381,7 @@ function SellerPage() {
             {formErrors.carpet_area}
           </Form.Control.Feedback>
         </Form.Group>
+
         <Row>
           <Col>
             <Form.Group className="input-lg">
@@ -401,6 +418,7 @@ function SellerPage() {
             </Form.Group>
           </Col>
         </Row>
+
         <Form.Group className="input-lg">
           <Form.Label>Description</Form.Label>
           <Form.Control
@@ -427,6 +445,14 @@ function SellerPage() {
             className="auth-button"
           >
             Submit
+          </Button>
+          <Button
+            onClick={handleLogout}
+            variant="outline-primary"
+            size="lg"
+            className="auth-button"
+          >
+            Logout
           </Button>
         </div>
       </Form>
