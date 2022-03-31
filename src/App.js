@@ -14,6 +14,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
+import UserProfile from "./components/properties/UserProfile";
 
 export const AuthContext = React.createContext();
 
@@ -75,24 +76,29 @@ function App() {
               exact
               path="/contactedproperties"
               element={
-                <PrivateRoute>
+                
                   <ContactedProperties />
-                </PrivateRoute>
+          
               }
             />
             <Route
               exact
               path="/proposedproperties"
               element={
-                <PrivateRoute>
+                
                   <ProposedProperties />
-                </PrivateRoute>
+                
               }
             />
             <Route
               exact
               path="/propertyviewpage"
               element={<PropertyViewPage />}
+            />
+            <Route
+              exact
+              path="/profile"
+              element={<UserProfile path={'/profile'} />}
             />
           </Routes>
         </BrowserRouter>

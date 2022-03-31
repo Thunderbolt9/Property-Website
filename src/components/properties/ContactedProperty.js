@@ -50,11 +50,11 @@ function ContactedProperty() {
             <Card className="propertyImage">
               <Card.Img variant="top" src={post.url} />
               <div className="text-center">
-                <Card.ImgOverlay className="imageOverlay">
+                <Card.ImgOverlay>
                   <Button
-                    variant="light"
+                    variant="outline-primary"
                     size="lg"
-                    style={{ color: "#75A5FF" }}
+                    className="button"
                   >
                     House
                   </Button>

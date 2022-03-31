@@ -12,8 +12,11 @@
     width: 34rem;
   }
   
-  .imageOverlay {
-    margin-top: 15rem;
+  .button {
+    color: #75A5FF;
+    width: 10rem;
+    border-radius: 20rem;
+    margin-top: 16rem;
   }
   
   
@@ -29,7 +32,7 @@
           width: 20rem;
         }
   
-        .imageOverlay {
+        .button {
           margin-top: 7rem;
         }
   }
