@@ -1,26 +1,87 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Menu from "../Menu";
 import Footer from "../Footer";
 import { Form, Button } from "react-bootstrap";
 import "../../css/UserProfile.css";
+import { AuthContext } from "../../App";
 
 export default function UserProfile({ path }) {
   const [disable, setDisable] = useState(true);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const currentUser = useContext(AuthContext);
+  const initialValues = {
+    name: currentUser.name,
+    phone: currentUser.phone,
+  };
+  const [formValues, setFormValues] = useState(initialValues);
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+  };
+
+  const validate = (values) => {
+    const errors = {};
+    const phoneRegex = /^\d{10}$/;
+    if (!values.name) {
+      errors.name = "Name is required!*";
+    }
+    if (!values.phone) {
+      errors.phone = "phone is required!*";
+    } else if (!phoneRegex.test(values.phone)) {
+      errors.phone = "This is not a valid phone format!";
+    }
+    return errors;
+  };
   return (
     <div>
       <Menu />
       <div className="formDiv">
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <h4 className="text-center">User Profile</h4>
           <br />
           <Form.Group className="mb-3">
             <Form.Label>Name</Form.Label>
-            <Form.Control type="text" required disabled={disable} />
+            <Form.Control
+              type="text"
+              name="name"
+              disabled={disable}
+              value={formValues.name}
+              onChange={handleChange}
+              isInvalid={formErrors.name ? true : false}
+            />
+            <Form.Control.Feedback type="invalid">
+                {formErrors.name}
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="mb-3">
             <Form.Label>Contact</Form.Label>
-            <Form.Control type="number" required disabled={disable} />
+            <Form.Control
+              type="number"
+              name="phone"
+              disabled={disable}
+              value={formValues.phone}
+              onChange={handleChange}
+              isInvalid={formErrors.phone}
+            />
+            <Form.Control.Feedback type="invalid">
+                {formErrors.phone}
+            </Form.Control.Feedback>
           </Form.Group>
           {path === "/profile" ? (
             ""
