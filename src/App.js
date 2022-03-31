@@ -10,6 +10,7 @@ import SellerPage from "./components/properties/SellerPage";
 import ContactedProperties from "./components/properties/ContactedProperty";
 import ProposedProperties from "./components/properties/ProposedPropertyPage";
 import PropertyViewPage from "./components/properties/PropertyViewPage";
+import AdminUserPage from "./components/admin/AdminUserPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { API_URL } from "./config";
 import axios from "axios";
@@ -86,6 +87,7 @@ function App() {
               path="/propertyviewpage"
               element={<PropertyViewPage />}
             />
+            <Route exact path="/adminuserpage" element={<AdminUserPage />} />
           </Routes>
         </BrowserRouter>
       )}

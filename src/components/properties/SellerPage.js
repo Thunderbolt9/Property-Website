@@ -47,7 +47,7 @@ function SellerPage() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formValues);
     }
-  }, [formErrors]);
+  }, [formErrors, formValues, isSubmit]);
 
   const handleFile = (refname) => {
     if (refname === "fileone") {
