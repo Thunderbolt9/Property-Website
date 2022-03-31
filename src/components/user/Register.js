@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import authService from "../../services/authService";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, NavLink } from "react-router-dom";
 import { AuthContext } from "../../App";
 import store from "../../redux/store";
 import "../../css/auth.css";
@@ -203,9 +203,9 @@ function Register() {
         <div className="text-center text-muted">
           Already have an account?{" "}
           <span>
-            <a href="/login" className="text-decoration-none">
+            <NavLink to="/login" className="text-decoration-none">
               Login
-            </a>
+            </NavLink>
           </span>
         </div>
       </Form>
