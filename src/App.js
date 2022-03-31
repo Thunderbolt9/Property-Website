@@ -7,6 +7,7 @@ import BuyerPage from "./components/properties/BuyerPage";
 import SellerPage from "./components/properties/SellerPage";
 import ContactedProperties from "./components/properties/ContactedProperty";
 import ProposedProperties from "./components/properties/ProposedPropertyPage";
+import AdminUserPage from "./components/admin/AdminUserPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/sellerpage" element={<SellerPage />} />
         <Route path="/contactedproperties" element={<ContactedProperties />} />
         <Route path="/proposedproperties" element={<ProposedProperties />} />
+        <Route path="/adminuserpage" element={<AdminUserPage />} />
       </Routes>
     </BrowserRouter>
   );

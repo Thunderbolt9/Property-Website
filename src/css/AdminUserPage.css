@@ -1,19 +1,8 @@
-.logo {
-  font-size: 2.188rem;
-  font-weight: bold;
-}
-
-.navtext {
-  font-size: 1.3rem;
-  margin-right: 1.2rem;
-}
-
-.navtext:hover {
-  font-weight: bold;
-}
-
-.navbarBg {
-  background-color: white;
+.headingDiv {
+  display: flex;
+  gap: 2rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .createUserButton {
@@ -29,4 +18,15 @@
 .createUserButton:hover {
   background-color: #75a5ff;
   color: white;
+}
+
+.userTable {
+  white-space: nowrap;
+  text-align: center;
+}
+
+.pagination {
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }

@@ -38,18 +38,15 @@
 }
 
 .productServices {
-  width: 50%;
   font-weight: 250;
+  text-align: center;
   font-size: 1.8rem;
-  margin: auto;
-  margin-top: 7rem;
+  margin-top: 5rem;
 }
 
 .services {
   display: flex;
   gap: 4rem;
-  width: 90%;
-  margin: auto;
   margin-top: 7rem;
   margin-bottom: 7rem;
 }
