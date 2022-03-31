@@ -70,12 +70,20 @@ function App() {
             <Route
               exact
               path="/contactedproperties"
-              element={<ContactedProperties />}
+              element={
+                <PrivateRoute>
+                  <ContactedProperties />
+                </PrivateRoute>
+              }
             />
             <Route
               exact
               path="/proposedproperties"
-              element={<ProposedProperties />}
+              element={
+                <PrivateRoute>
+                  <ProposedProperties />
+                </PrivateRoute>
+              }
             />
             <Route
               exact
