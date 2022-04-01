@@ -39,7 +39,7 @@ function AdminPropertyPage() {
       <Container>
         <div className="flex-container">
           <h1 className="set">All Properties</h1>
-          <button className="setbutton">Create New</button>
+          <button className="setbutton">Create New Property</button>
         </div>
 
         <Table striped bordered responsive className="noWrap">

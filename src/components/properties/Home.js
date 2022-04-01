@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Menu from "../Menu";
 import "../../css/Home.css";
 import { ReactComponent as ServiceLogo } from "../../assets/Vector.svg";
 import Footer from "../Footer";
+import { Container } from "react-bootstrap";
 
 function Home() {
+  const navigate = useNavigate();
   return (
     <>
       <div className="heroImage">
@@ -14,15 +17,22 @@ function Home() {
           <h3 className="heroBody">
             Everyone Deserves the Opportunity of Home
           </h3>
-          <button className="heroButton">Buy Now</button>
+          <button
+            className="heroButton"
+            onClick={() => {
+              navigate("/buyerpage");
+            }}
+          >
+            Buy Now
+          </button>
         </div>
       </div>
-      <div className="productServices">
+      <Container className="productServices">
         <p>A Better Home Buying And Selling Experience Starts Here</p>
-      </div>
+      </Container>
 
       {/* Company services */}
-      <div className="services">
+      <Container className="services">
         <div>
           <div className="serviceIconDiv">
             <ServiceLogo className="serviceIcon" />
@@ -30,7 +40,14 @@ function Home() {
           <h4>Buy</h4>
           <p>Know the real going price for the property you want</p>
           <p>Get Pre-Approved Home Loan you can avail</p>
-          <p className="text-primary serviceCardLink">{"Buy Homes >"}</p>
+          <p
+            className="text-primary serviceCardLink"
+            onClick={() => {
+              navigate("/buyerpage");
+            }}
+          >
+            {"Buy Homes >"}
+          </p>
         </div>
         <div>
           <div className="serviceIconDiv">
@@ -50,7 +67,7 @@ function Home() {
           <p>Sell on your terms and at a price you want</p>
           <p className="text-primary serviceCardLink">{"Rent Homes >"}</p>
         </div>
-      </div>
+      </Container>
 
       {/* Testimonial */}
       <div className="testimonial">
@@ -113,7 +130,12 @@ function Home() {
             src={`https://images.ctfassets.net/3s5io6mnxfqz/2IW4MOaC7MJObCYclek03J/b6b6f6d963f0413559d9677c50ee3a49/what-is-a-studio-apartment.jpeg?fm=jpg&w=900&fl=progressive`}
           />
         </div>
-        <p className="text-primary text-center latestPropertyLink">
+        <p
+          className="text-primary text-center latestPropertyLink"
+          onClick={() => {
+            navigate("/buyerpage");
+          }}
+        >
           {"Explore more >"}
         </p>
       </div>

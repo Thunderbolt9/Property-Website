@@ -29,6 +29,7 @@ function BuyerPage() {
       );
       setPosts(res.data);
     };
+
     fetchPosts();
   }, []);
 
@@ -60,13 +61,19 @@ function BuyerPage() {
                     <Col md>
                       <Form.Label htmlFor=""></Form.Label>
                       <Form.Select id="Select">
-                        <option>SelectType</option>
+                        <option>Select Flat Type</option>
+                        <option>1 BHK</option>
+                        <option>2 BHK</option>
+                        <option>3 BHK</option>
+                        <option>4 BHK</option>
+                        <option>Villa</option>
+                        <option>Other</option>
                       </Form.Select>
                     </Col>
                     <Col md>
                       <Form.Label htmlFor=""></Form.Label>
                       <Form.Select id="Select">
-                        <option>SelectType</option>
+                        <option>Select City</option>
                       </Form.Select>
                     </Col>
                   </Row>
@@ -83,19 +90,15 @@ function BuyerPage() {
                 <Card>
                   <Card.Img variant="top" src={post.url} />
 
-                  <Card.ImgOverlay className="imgoverlay">
-                    <Button className="setbutton"
-                      
-                    >
-                      Palazo
-                    </Button>
+                  <Card.ImgOverlay className="img-overlay">
+                    <Button className="img-button">Palazo</Button>
                   </Card.ImgOverlay>
                 </Card>
               </Col>
             ))}
           </Row>
         </div>
-        <Pagination className="page" >
+        <Pagination className="page">
           {pageNumbers.map((number) => {
             return (
               <Pagination.Item onClick={() => paginate(number)}>

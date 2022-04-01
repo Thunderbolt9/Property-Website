@@ -5,8 +5,9 @@ import Button from "react-bootstrap/Button";
 import { Row, Col } from "react-bootstrap";
 import store from "../../redux/store";
 import axios from "axios";
+import "../../css/RentPage.css";
 
-function SellerPage() {
+function RentPage() {
   const initialValues = {
     property_name: "",
     address_line_one: "",
@@ -19,6 +20,8 @@ function SellerPage() {
     carpet_area: "",
     build_area: "",
     price: "",
+    downpayment: "",
+    monthly: "",
     description: "",
   };
 
@@ -135,7 +138,7 @@ function SellerPage() {
         onSubmit={handleSubmit}
         className="d-flex flex-column gap-4 shadow-sm form-bg p-3"
       >
-        <h3 className="text-center">Sell Property</h3>
+        <h3 className="text-center">Rent Page</h3>
         <Form.Group>
           <Form.Label>Property Name</Form.Label>
           <Form.Control
@@ -400,20 +403,41 @@ function SellerPage() {
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
+        </Row>
+
+        <Row>
           <Col>
             <Form.Group className="input-lg">
               <Form.Label>Price</Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 size="lg"
-                name="price"
-                placeholder="Price"
-                value={formValues.price}
+                name="downpayment"
+                placeholder="Down Payment"
+                value={formValues.downpayment}
                 onChange={handleChange}
-                isInvalid={formErrors.price ? true : false}
+                isInvalid={formErrors.city ? true : false}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
-                {formErrors.price}
+                {formErrors.city}
+              </Form.Control.Feedback>
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="input-lg">
+              <Form.Label> </Form.Label>
+              <Form.Control
+                type="number"
+                style={{ marginTop: "0.5rem" }}
+                size="lg"
+                name="monthly"
+                placeholder="Monthly"
+                value={formValues.monthly}
+                onChange={handleChange}
+                isInvalid={formErrors.zipcode ? true : false}
+              ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {formErrors.zipcode}
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
@@ -446,19 +470,18 @@ function SellerPage() {
           >
             Submit
           </Button>
-          <Button
+          {/* <Button
             onClick={handleLogout}
             variant="outline-primary"
             size="lg"
             className="auth-button"
           >
             Logout
-          </Button>
+          </Button> */}
         </div>
       </Form>
     </div>
   );
 }
 
-export default SellerPage;
-
+export default RentPage;
