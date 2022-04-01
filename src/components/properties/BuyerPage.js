@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "../Footer";
 import "../../css/Buyerpage.css";
 
+
 //MAIN FUNCTION----->
 function BuyerPage() {
   const [posts, setPosts] = useState([]);
@@ -111,6 +112,7 @@ function BuyerPage() {
       <Footer />
     </>
   );
+
 }
 
 export default BuyerPage;

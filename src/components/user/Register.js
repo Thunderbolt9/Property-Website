@@ -2,10 +2,13 @@ import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import authService from "../../services/authService";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, NavLink } from "react-router-dom";
 import { AuthContext } from "../../App";
 import store from "../../redux/store";
 import "../../css/auth.css";
+import "../../css/Menu.css";
+import Menu from "../Menu";
+import Footer from "../Footer";
 
 function Register() {
   const initialValues = {
@@ -28,9 +31,9 @@ function Register() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       async function registerUser() {
         const res = await authService.register(formValues);
-        console.log(res.error);
         if (res.error) {
           setServerError({ server_error: res.error });
+          setIsSubmit(false);
         } else {
           store.dispatch({
             type: "userAdded",
@@ -43,7 +46,8 @@ function Register() {
       }
       registerUser();
     }
-  }, [formErrors, navigate, formValues, isSubmit]);
+  }, [formErrors, formValues, isSubmit, navigate]);
+  //update only when threr is change in formErrors
 
   if (currentUser) {
     return <Navigate to="/login"></Navigate>;
@@ -94,89 +98,91 @@ function Register() {
   };
 
   return (
-    <div className="auth-form-container">
-      <Form
-        onSubmit={handleSubmit}
-        className="p-4 d-flex flex-column gap-3 shadow-sm form-bg"
-      >
-        <h3 className="text-center">Register</h3>
+    <>
+      <Menu />
+      <div className="auth-form-container">
+        <Form
+          onSubmit={handleSubmit}
+          className="p-4 d-flex flex-column gap-3 shadow-sm form-bg"
+        >
+          <h3 className="text-center">Register</h3>
 
-        <Form.Group>
-          <Form.Control
-            type="text"
-            size="lg"
-            placeholder="Name"
-            name="name"
-            value={formValues.name}
-            onChange={handleChange}
-            isInvalid={formErrors.name ? true : false}
-          ></Form.Control>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.name}
-          </Form.Control.Feedback>
-        </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              size="lg"
+              placeholder="Name"
+              name="name"
+              value={formValues.name}
+              onChange={handleChange}
+              isInvalid={formErrors.name ? true : false}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {formErrors.name}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group className="input-lg">
-          <Form.Control
-            type="text"
-            size="lg"
-            placeholder="Email"
-            name="email"
-            value={formValues.email}
-            onChange={handleChange}
-            isInvalid={formErrors.email ? true : false}
-          ></Form.Control>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.email}
-          </Form.Control.Feedback>
-        </Form.Group>
+          <Form.Group className="input-lg">
+            <Form.Control
+              type="text"
+              size="lg"
+              placeholder="Email"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+              isInvalid={formErrors.email ? true : false}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {formErrors.email}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group>
-          <Form.Control
-            type="text"
-            size="lg"
-            placeholder="Phone No"
-            name="phone"
-            value={formValues.phone}
-            onChange={handleChange}
-            isInvalid={formErrors.phone ? true : false}
-          ></Form.Control>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.phone}
-          </Form.Control.Feedback>
-        </Form.Group>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              size="lg"
+              placeholder="Phone No"
+              name="phone"
+              value={formValues.phone}
+              onChange={handleChange}
+              isInvalid={formErrors.phone ? true : false}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {formErrors.phone}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group className="input-lg">
-          <Form.Control
-            type="password"
-            size="lg"
-            placeholder="Password"
-            name="password"
-            value={formValues.password}
-            onChange={handleChange}
-            isInvalid={formErrors.password ? true : false}
-          ></Form.Control>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.password}
-          </Form.Control.Feedback>
-        </Form.Group>
+          <Form.Group className="input-lg">
+            <Form.Control
+              type="password"
+              size="lg"
+              placeholder="Password"
+              name="password"
+              value={formValues.password}
+              onChange={handleChange}
+              isInvalid={formErrors.password ? true : false}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {formErrors.password}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group className="input-lg">
-          <Form.Control
-            type="password"
-            size="lg"
-            placeholder="Confirm Password"
-            name="cpassword"
-            value={formValues.cpassword}
-            onChange={handleChange}
-            isInvalid={formErrors.cpassword ? true : false}
-          ></Form.Control>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.cpassword}
-          </Form.Control.Feedback>
-        </Form.Group>
-        <div className="text-danger">{serverError.server_error}</div>
-        {/* <Form.Group className="input-lg">
+          <Form.Group className="input-lg">
+            <Form.Control
+              type="password"
+              size="lg"
+              placeholder="Confirm Password"
+              name="cpassword"
+              value={formValues.cpassword}
+              onChange={handleChange}
+              isInvalid={formErrors.cpassword ? true : false}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {formErrors.cpassword}
+            </Form.Control.Feedback>
+          </Form.Group>
+          <div className="text-danger">{serverError.server_error}</div>
+          {/* <Form.Group className="input-lg">
           <Form.Check
             size="lg"
             type="checkbox"
@@ -189,27 +195,24 @@ function Register() {
           </Form.Control.Feedback>
         </Form.Group> */}
 
-        <div className="text-center">
-          <Button
-            type="submit"
-            variant="outline-primary"
-            size="lg"
-            className="auth-button"
-          >
-            Register
-          </Button>
-        </div>
-        <hr className="m-0" />
-        <div className="text-center text-muted">
-          Already have an account?{" "}
-          <span>
-            <a href="/login" className="text-decoration-none">
-              Login
-            </a>
-          </span>
-        </div>
-      </Form>
-    </div>
+          <div className="text-center">
+            <Button type="submit" size="lg" className="createUserButton">
+              Register
+            </Button>
+          </div>
+          <hr className="m-0" />
+          <div className="text-center text-muted">
+            Already have an account?{" "}
+            <span>
+              <NavLink to="/login" className="text-decoration-none">
+                Login
+              </NavLink>
+            </span>
+          </div>
+        </Form>
+      </div>
+      <Footer />
+    </>
   );
 }
 
