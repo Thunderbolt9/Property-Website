@@ -2,33 +2,40 @@ import React, { useState, useEffect } from "react";
 import "../../css/SellerPage.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Spinner } from "react-bootstrap";
 import store from "../../redux/store";
+import apiService from "../../services/apiService";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function SellerPage() {
   const initialValues = {
-    property_name: "",
+    name: "",
     address_line_one: "",
     address_line_two: "",
     city: "",
     zipcode: "",
-    file_one: null,
-    file_two: null,
-    file_three: null,
-    carpet_area: "",
-    build_area: "",
+    fileOne: null,
+    fileTwo: null,
+    fileThree: null,
+    carpetArea: "",
+    buildupArea: "",
     price: "",
     description: "",
+    apartmentType: "",
   };
 
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [showSpinner, setSpinner] = useState(false);
+  const [serverError, setServerError] = useState({});
 
   const fileone = React.createRef();
   const filetwo = React.createRef();
   const filethree = React.createRef();
+
+  const navigate = useNavigate();
 
   const styles = {
     image: {
@@ -45,9 +52,22 @@ function SellerPage() {
   // Form data avaialble here
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+      async function createProperty() {
+        try {
+          setSpinner(true);
+          const res = await apiService.createProperty(formValues);
+          console.log(res);
+          navigate("/propertyviewpage");
+        } catch (err) {
+          setServerError({ server_error: err.message });
+          setSpinner(false);
+          setIsSubmit(false);
+        }
+      }
+      createProperty();
     }
-  }, [formErrors, formValues, isSubmit]);
+    // update only when there is change in formerrors
+  }, [formErrors]);
 
   const handleFile = (refname) => {
     if (refname === "fileone") {
@@ -65,6 +85,7 @@ function SellerPage() {
       {},
       { withCredentials: true }
     );
+
     store.dispatch({
       type: "userDeleted",
       payload: {
@@ -75,7 +96,7 @@ function SellerPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "file_one" || name === "file_two" || name === "file_three") {
+    if (name === "fileOne" || name === "fileTwo" || name === "fileThree") {
       setFormValues({
         ...formValues,
         [name]: e.target.files[0],
@@ -87,14 +108,15 @@ function SellerPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setServerError(false);
     setFormErrors(validate(formValues));
     setIsSubmit(true);
   };
 
   const validate = (values) => {
     const errors = {};
-    if (!values.property_name) {
-      errors.property_name = "Property name is required!*";
+    if (!values.name) {
+      errors.name = "Property name is required!*";
     }
     if (!values.address_line_one) {
       errors.address_line_one = "Address is required!*";
@@ -108,17 +130,17 @@ function SellerPage() {
     if (!values.zipcode) {
       errors.zipcode = "Zipcode is required!*";
     }
-    if (!values.apartment_type) {
-      errors.apartment_type = "Apartment type is required!*";
+    if (!values.apartmentType) {
+      errors.apartmentType = "Apartment type is required!*";
     }
-    if (!values.file_one || !values.file_two || !values.file_three) {
-      errors.file_one = "You must upload all three images!*";
+    if (!values.fileOne || !values.fileTwo || !values.fileThree) {
+      errors.fileOne = "You must upload all three images!*";
     }
-    if (!values.carpet_area) {
-      errors.carpet_area = "Carpet area is required!*";
+    if (!values.carpetArea) {
+      errors.carpetArea = "Carpet area is required!*";
     }
-    if (!values.build_area) {
-      errors.build_area = "buildup area is required!*";
+    if (!values.buildupArea) {
+      errors.buildupArea = "buildup area is required!*";
     }
     if (!values.price) {
       errors.price = "Price is required!*";
@@ -141,14 +163,14 @@ function SellerPage() {
           <Form.Control
             type="text"
             size="lg"
-            name="property_name"
+            name="name"
             placeholder="Property Name"
-            value={formValues.property_name}
+            value={formValues.name}
             onChange={handleChange}
-            isInvalid={formErrors.property_name ? true : false}
+            isInvalid={formErrors.name ? true : false}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            {formErrors.property_name}
+            {formErrors.name}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -226,12 +248,12 @@ function SellerPage() {
           <br></br>
           <Form.Control
             hidden
-            isInvalid={formErrors.apartment_type ? true : false}
+            isInvalid={formErrors.apartmentType ? true : false}
           ></Form.Control>
           <Form.Check
             inline
             label="1 BHK"
-            name="apartment_type"
+            name="apartmentType"
             value="1 BHK"
             onChange={handleChange}
             type="radio"
@@ -240,7 +262,7 @@ function SellerPage() {
           <Form.Check
             inline
             label="2 BHK"
-            name="apartment_type"
+            name="apartmentType"
             value="2 BHK"
             onChange={handleChange}
             type="radio"
@@ -249,7 +271,7 @@ function SellerPage() {
           <Form.Check
             inline
             label="3 BHK"
-            name="apartment_type"
+            name="apartmentType"
             value="3 BHK"
             onChange={handleChange}
             type="radio"
@@ -258,7 +280,7 @@ function SellerPage() {
           <Form.Check
             inline
             label="4 BHK"
-            name="apartment_type"
+            name="apartmentType"
             value="4 BHK"
             onChange={handleChange}
             type="radio"
@@ -267,7 +289,7 @@ function SellerPage() {
           <Form.Check
             inline
             label="Villa"
-            name="apartment_type"
+            name="apartmentType"
             value="Villa"
             onChange={handleChange}
             type="radio"
@@ -276,14 +298,14 @@ function SellerPage() {
           <Form.Check
             inline
             label="Other"
-            name="apartment_type"
+            name="apartmentType"
             value="Other"
             onChange={handleChange}
             type="radio"
             id={`inline-$radio-2`}
           />
           <Form.Control.Feedback type="invalid">
-            {formErrors.apartment_type}
+            {formErrors.apartmentType}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -291,14 +313,14 @@ function SellerPage() {
           <Form.Label>Upload Images</Form.Label>
           <Form.Control
             hidden
-            isInvalid={formErrors.file_one ? true : false}
+            isInvalid={formErrors.fileOne ? true : false}
           ></Form.Control>
           <Row className="vertical-spacing">
             <Col xs={12} md={4}>
               <img
                 src={
-                  formValues.file_one
-                    ? window.URL.createObjectURL(formValues.file_one)
+                  formValues.fileOne
+                    ? window.URL.createObjectURL(formValues.fileOne)
                     : defaultBackGround
                 }
                 alt="images"
@@ -312,15 +334,15 @@ function SellerPage() {
                 ref={fileone}
                 accept="image/*"
                 type="file"
-                name="file_one"
+                name="fileOne"
                 hidden
               />
             </Col>
             <Col xs={12} md={4}>
               <img
                 src={
-                  formValues.file_two
-                    ? window.URL.createObjectURL(formValues.file_two)
+                  formValues.fileTwo
+                    ? window.URL.createObjectURL(formValues.fileTwo)
                     : defaultBackGround
                 }
                 alt="images"
@@ -334,15 +356,15 @@ function SellerPage() {
                 ref={filetwo}
                 accept="image/*"
                 type="file"
-                name="file_two"
+                name="fileTwo"
                 hidden
               />
             </Col>
             <Col xs={12} md={4}>
               <img
                 src={
-                  formValues.file_three
-                    ? window.URL.createObjectURL(formValues.file_three)
+                  formValues.fileThree
+                    ? window.URL.createObjectURL(formValues.fileThree)
                     : defaultBackGround
                 }
                 alt="images"
@@ -356,13 +378,13 @@ function SellerPage() {
                 ref={filethree}
                 accept="image/*"
                 type="file"
-                name="file_three"
+                name="fileThree"
                 hidden
               />
             </Col>
           </Row>
           <Form.Control.Feedback type="invalid">
-            {formErrors.file_one}
+            {formErrors.fileOne}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -371,14 +393,14 @@ function SellerPage() {
           <Form.Control
             type="number"
             size="lg"
-            name="carpet_area"
+            name="carpetArea"
             placeholder="Carpet Area"
-            value={formValues.carpet_area}
+            value={formValues.carpetArea}
             onChange={handleChange}
-            isInvalid={formErrors.carpet_area ? true : false}
+            isInvalid={formErrors.carpetArea ? true : false}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            {formErrors.carpet_area}
+            {formErrors.carpetArea}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -389,14 +411,14 @@ function SellerPage() {
               <Form.Control
                 type="number"
                 size="lg"
-                name="build_area"
+                name="buildupArea"
                 placeholder="Buildup Area"
-                value={formValues.build_area}
+                value={formValues.buildupArea}
                 onChange={handleChange}
-                isInvalid={formErrors.build_area ? true : false}
+                isInvalid={formErrors.buildupArea ? true : false}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
-                {formErrors.build_area}
+                {formErrors.buildupArea}
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
@@ -436,6 +458,16 @@ function SellerPage() {
             {formErrors.description}
           </Form.Control.Feedback>
         </Form.Group>
+
+        <div className="text-danger">{serverError.server_error}</div>
+
+        {showSpinner ? (
+          <div className="text-center">
+            <Spinner animation="border" variant="primary" />
+          </div>
+        ) : (
+          ""
+        )}
 
         <div className="text-center">
           <Button

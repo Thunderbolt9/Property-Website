@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import authService from "../../services/authService";
-import { useNavigate, Navigate } from "react-router";
+import { useNavigate, Navigate, NavLink } from "react-router-dom";
 import "../../css/auth.css";
 import { AuthContext } from "../../App";
 import store from "../../redux/store";
@@ -23,6 +23,7 @@ function Login(props) {
         const res = await authService.login(formValues);
         if (res.error) {
           setServerError({ server_error: res.error });
+          setIsSubmit(false);
         } else {
           store.dispatch({
             type: "userAdded",
@@ -35,10 +36,10 @@ function Login(props) {
       }
       loginUser();
     }
-  }, [formErrors, navigate, formValues, isSubmit]);
+  }, [formErrors]);
+  //update only when threr is change in formErrors
 
   if (currentUser) {
-    console.log("currentUser", currentUser);
     return <Navigate to="/sellerpage"></Navigate>;
   }
 
@@ -130,9 +131,9 @@ function Login(props) {
         <div className="text-center text-muted">
           Don't have an account?{" "}
           <span>
-            <a href="/register" className="text-decoration-none">
+            <NavLink to="/register" className="text-decoration-none">
               Register
-            </a>
+            </NavLink>
           </span>
         </div>
       </Form>

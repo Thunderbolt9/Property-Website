@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import authService from "../../services/authService";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, NavLink } from "react-router-dom";
 import { AuthContext } from "../../App";
 import store from "../../redux/store";
 import "../../css/auth.css";
@@ -28,9 +28,9 @@ function Register() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       async function registerUser() {
         const res = await authService.register(formValues);
-        console.log(res.error);
         if (res.error) {
           setServerError({ server_error: res.error });
+          setIsSubmit(false);
         } else {
           store.dispatch({
             type: "userAdded",
@@ -43,7 +43,8 @@ function Register() {
       }
       registerUser();
     }
-  }, [formErrors, navigate, formValues, isSubmit]);
+  }, [formErrors]);
+  //update only when threr is change in formErrors
 
   if (currentUser) {
     return <Navigate to="/login"></Navigate>;
@@ -203,9 +204,9 @@ function Register() {
         <div className="text-center text-muted">
           Already have an account?{" "}
           <span>
-            <a href="/login" className="text-decoration-none">
+            <NavLink to="/login" className="text-decoration-none">
               Login
-            </a>
+            </NavLink>
           </span>
         </div>
       </Form>
