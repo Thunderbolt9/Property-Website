@@ -23,6 +23,7 @@ function Login(props) {
         const res = await authService.login(formValues);
         if (res.error) {
           setServerError({ server_error: res.error });
+          setIsSubmit(false);
         } else {
           store.dispatch({
             type: "userAdded",
@@ -35,10 +36,10 @@ function Login(props) {
       }
       loginUser();
     }
-  }, [formErrors, navigate, formValues, isSubmit]);
+  }, [formErrors]);
+  //update only when threr is change in formErrors
 
   if (currentUser) {
-    console.log("currentUser", currentUser);
     return <Navigate to="/sellerpage"></Navigate>;
   }
 

@@ -12,7 +12,7 @@ const authFunctions = {
   async login(payload) {
     try {
       const res = await axios.post(
-        `${API_URL}/api/v1/user/login`,
+        `${API_URL}/user/login`,
         payload,
         { withCredentials: true },
         payloadHeader
@@ -31,7 +31,7 @@ const authFunctions = {
   async register(payload) {
     try {
       const res = await axios.post(
-        `${API_URL}/api/v1/user/register`,
+        `${API_URL}/user/register`,
         payload,
         { withCredentials: true },
         payloadHeader

@@ -28,9 +28,9 @@ function Register() {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       async function registerUser() {
         const res = await authService.register(formValues);
-        console.log(res.error);
         if (res.error) {
           setServerError({ server_error: res.error });
+          setIsSubmit(false);
         } else {
           store.dispatch({
             type: "userAdded",
@@ -43,7 +43,8 @@ function Register() {
       }
       registerUser();
     }
-  }, [formErrors, navigate, formValues, isSubmit]);
+  }, [formErrors]);
+  //update only when threr is change in formErrors
 
   if (currentUser) {
     return <Navigate to="/login"></Navigate>;
