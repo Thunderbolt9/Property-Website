@@ -4,10 +4,13 @@ import Footer from "../Footer";
 import { Form, Button } from "react-bootstrap";
 import "../../css/UserProfile.css";
 import { AuthContext } from "../../App";
+import updateService from "../../services/authService";
+import store from "../../redux/store";
 
 export default function UserProfile({ path }) {
   const [disable, setDisable] = useState(true);
   const [formErrors, setFormErrors] = useState({});
+  const [serverError, setServerError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
   const currentUser = useContext(AuthContext);
@@ -19,6 +22,21 @@ export default function UserProfile({ path }) {
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
+      async function updateUser() {
+        const res = await updateService.update(formValues);
+        console.log(res.error);
+        if (res.error) {
+          setServerError({ server_error: res.error });
+        } else {
+          store.dispatch({
+            type: "userAdded",
+            payload: {
+              user: res.user
+            }
+          });
+      }
+    }
+      updateUser();
       console.log(formValues);
     }
   }, [formErrors]);
@@ -41,7 +59,7 @@ export default function UserProfile({ path }) {
       errors.name = "Name is required!*";
     }
     if (!values.phone) {
-      errors.phone = "phone is required!*";
+      errors.phone = "Phone is required!*";
     } else if (!phoneRegex.test(values.phone)) {
       errors.phone = "This is not a valid phone format!";
     }

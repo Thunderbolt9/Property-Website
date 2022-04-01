@@ -42,7 +42,7 @@ function ProposedPropertyPage() {
       <Menu />
       <br />
       <br />
-      <h1 className="text-center">Posted Properties</h1>
+      <h3 className="text-center">Posted Properties</h3>
       <br />
       <Row xs={1} md={2} className="propertyDiv">
         {currentPosts.map((post) => (

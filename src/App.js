@@ -75,20 +75,12 @@ function App() {
             <Route
               exact
               path="/contactedproperties"
-              element={
-                
-                  <ContactedProperties />
-          
-              }
+              element={<ContactedProperties />}
             />
             <Route
               exact
               path="/proposedproperties"
-              element={
-                
-                  <ProposedProperties />
-                
-              }
+              element={<ProposedProperties />}
             />
             <Route
               exact

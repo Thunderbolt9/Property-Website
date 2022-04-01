@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { AuthContext } from "../App";
 import "../css/Menu.css";
 
 function Menu() {
+  let currentUser = useContext(AuthContext);
   return (
     <Navbar className="navbarBg" expand="lg">
       <Container>
@@ -25,7 +27,7 @@ function Menu() {
               Rent
             </Nav.Link>
             <NavDropdown
-              title={<span className="text-black">Welcome Bhavesh</span>}
+              title={<span className="text-black">{currentUser.name}</span>}
               id="basic-nav-dropdown"
               className="navtext"
             >
