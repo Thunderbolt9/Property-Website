@@ -5,6 +5,29 @@
   padding-bottom: 50px;
 }
 
+.sell-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 5rem;
+}
+
+.submitSellButton {
+  color: #75a5ff;
+  width: 7rem;
+  border: 1px solid #75a5ff;
+  background-color: white;
+  border-radius: 5rem;
+  font-weight: 700;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.submitSellButton:hover {
+  background-color: #75a5ff;
+  color: white;
+}
+
 @media only screen and (max-width: 768px) {
   .vertical-spacing {
     gap: 15px;

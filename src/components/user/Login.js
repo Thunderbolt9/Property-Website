@@ -6,6 +6,9 @@ import { useNavigate, Navigate, NavLink } from "react-router-dom";
 import "../../css/auth.css";
 import { AuthContext } from "../../App";
 import store from "../../redux/store";
+import Menu from "../Menu";
+import Footer from "../Footer";
+import "../../css/Menu.css";
 
 function Login(props) {
   const initialValues = { email: "", password: "" };
@@ -31,16 +34,15 @@ function Login(props) {
               user: res.user,
             },
           });
-          navigate("/sellerpage");
         }
       }
       loginUser();
     }
-  }, [formErrors]);
+  }, [formErrors, formValues, isSubmit, navigate]);
   //update only when threr is change in formErrors
 
   if (currentUser) {
-    return <Navigate to="/sellerpage"></Navigate>;
+    return <Navigate to="/"></Navigate>;
   }
 
   const handleChange = (e) => {
@@ -74,70 +76,69 @@ function Login(props) {
   };
 
   return (
-    <div className="auth-form-container">
-      <Form
-        onSubmit={handleSubmit}
-        className="p-4 d-flex flex-column gap-4 shadow-sm form-bg"
-      >
-        <h3 className="text-center">Login</h3>
-        <Form.Group>
-          <Form.Control
-            type="text"
-            size="lg"
-            name="email"
-            placeholder="Email"
-            value={formValues.email}
-            onChange={handleChange}
-            isInvalid={formErrors.email ? true : false}
-          ></Form.Control>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.email}
-          </Form.Control.Feedback>
-        </Form.Group>
+    <>
+      <Menu />
+      <div className="auth-form-container" style={{ marginTop: "5rem" }}>
+        <Form
+          onSubmit={handleSubmit}
+          className="p-4 d-flex flex-column gap-4 shadow-sm form-bg"
+        >
+          <h3 className="text-center">Login</h3>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              size="lg"
+              name="email"
+              placeholder="Email"
+              value={formValues.email}
+              onChange={handleChange}
+              isInvalid={formErrors.email ? true : false}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {formErrors.email}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group className="input-lg">
-          <Form.Control
-            type="password"
-            size="lg"
-            name="password"
-            placeholder="Password"
-            value={formValues.password}
-            onChange={handleChange}
-            isInvalid={formErrors.password ? true : false}
-          ></Form.Control>
-          <Form.Control.Feedback type="invalid">
-            {formErrors.password}
-          </Form.Control.Feedback>
-        </Form.Group>
+          <Form.Group className="input-lg">
+            <Form.Control
+              type="password"
+              size="lg"
+              name="password"
+              placeholder="Password"
+              value={formValues.password}
+              onChange={handleChange}
+              isInvalid={formErrors.password ? true : false}
+            ></Form.Control>
+            <Form.Control.Feedback type="invalid">
+              {formErrors.password}
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <div className="text-danger">{serverError.server_error}</div>
+          <div className="text-danger">{serverError.server_error}</div>
 
-        <div className="text-center">
-          <Button
-            type="submit"
-            variant="outline-primary"
-            size="lg"
-            className="auth-button"
-          >
-            Login
-          </Button>
-        </div>
-        <div className="text-center text-muted">
-          <a href="/" className="text-decoration-none">
-            Forgot Password?
-          </a>
-        </div>
-        <hr className="m-0" />
-        <div className="text-center text-muted">
-          Don't have an account?{" "}
-          <span>
-            <NavLink to="/register" className="text-decoration-none">
-              Register
-            </NavLink>
-          </span>
-        </div>
-      </Form>
-    </div>
+          <div className="text-center">
+            <Button type="submit" className="createUserButton">
+              Login
+            </Button>
+          </div>
+          <div className="text-center text-muted">
+            <a href="/" className="text-decoration-none">
+              Forgot Password?
+            </a>
+          </div>
+          <hr className="m-0" />
+          <div className="text-center text-muted">
+            Don't have an account?{" "}
+            <span>
+              <NavLink to="/register" className="text-decoration-none">
+                Register
+              </NavLink>
+            </span>
+          </div>
+        </Form>
+      </div>
+      <Footer />
+    </>
   );
 }
 

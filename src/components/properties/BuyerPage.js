@@ -1,8 +1,7 @@
 import React from "react";
-import Menu from "../Menu";
 
 function BuyerPage() {
-  return <Menu />;
+  return <h1>Buyers Page</h1>;
 }
 
 export default BuyerPage;
