@@ -35,7 +35,7 @@ function Login(props) {
       }
       loginUser();
     }
-  }, [formErrors]);
+  }, [formErrors, navigate, formValues, isSubmit]);
 
   if (currentUser) {
     console.log("currentUser", currentUser);
@@ -122,7 +122,7 @@ function Login(props) {
           </Button>
         </div>
         <div className="text-center text-muted">
-          <a href="#" className="text-decoration-none">
+          <a href="/" className="text-decoration-none">
             Forgot Password?
           </a>
         </div>

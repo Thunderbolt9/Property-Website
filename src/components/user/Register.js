@@ -43,7 +43,7 @@ function Register() {
       }
       registerUser();
     }
-  }, [formErrors]);
+  }, [formErrors, navigate, formValues, isSubmit]);
 
   if (currentUser) {
     return <Navigate to="/login"></Navigate>;

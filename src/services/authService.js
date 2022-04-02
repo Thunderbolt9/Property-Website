@@ -45,6 +45,25 @@ const authFunctions = {
       return err.message;
     }
   },
+
+  // function for user profile updation
+  async update(payload) {
+    try {
+      const res = await axios.post(
+        `${API_URL}/api/v1/user/update`,
+        payload,
+        { withCredentials: true },
+        payloadHeader
+      );
+      return res.data;
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      }
+      console.log(err);
+      return err.message;
+    }
+  }
 };
 
 export default authFunctions;

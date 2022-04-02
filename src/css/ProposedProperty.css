@@ -16,7 +16,10 @@
     color: #75A5FF;
     width: 10rem;
     border-radius: 20rem;
-    margin-top: 16rem;
+  }
+
+  .button:hover {
+    background-color: #75A5FF;
   }
   
   

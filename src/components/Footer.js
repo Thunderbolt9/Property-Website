@@ -8,7 +8,7 @@ function Footer() {
       <Container>
         <div className="footerDiv">
           <div className="footerContent">
-            <h1 className="logo">Logo</h1>
+            <h1 className="logo">Property World</h1>
             <p className="mt-4">Contact us</p>
             <p className="mt-0 mb-0">Support Emails :</p>
             <p className="mt-0 mb-0">feedback@company.com,</p>

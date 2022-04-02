@@ -4,7 +4,7 @@ import Footer from "../Footer";
 import { Form, Button } from "react-bootstrap";
 import "../../css/UserProfile.css";
 import { AuthContext } from "../../App";
-import updateService from "../../services/authService";
+import authService from "../../services/authService";
 import store from "../../redux/store";
 
 export default function UserProfile({ path }) {
@@ -23,7 +23,7 @@ export default function UserProfile({ path }) {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       async function updateUser() {
-        const res = await updateService.update(formValues);
+        const res = await authService.update(formValues);
         console.log(res.error);
         if (res.error) {
           setServerError({ server_error: res.error });

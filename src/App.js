@@ -10,6 +10,7 @@ import SellerPage from "./components/properties/SellerPage";
 import ContactedProperties from "./components/properties/ContactedProperty";
 import ProposedProperties from "./components/properties/ProposedPropertyPage";
 import PropertyViewPage from "./components/properties/PropertyViewPage";
+import AdminUserPage from "./components/admin/AdminUserPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { API_URL } from "./config";
 import axios from "axios";
@@ -75,23 +76,37 @@ function App() {
             <Route
               exact
               path="/contactedproperties"
-              element={<ContactedProperties />}
+              element={
+                <PrivateRoute>
+                  <ContactedProperties />
+                </PrivateRoute>
+              }
             />
             <Route
               exact
               path="/proposedproperties"
-              element={<ProposedProperties />}
+              element={
+                <PrivateRoute>
+                  <ProposedProperties />
+                </PrivateRoute>
+              }
             />
             <Route
               exact
               path="/propertyviewpage"
               element={<PropertyViewPage />}
             />
+
             <Route
               exact
               path="/profile"
-              element={<UserProfile path={'/profile'} />}
+              element={
+                <PrivateRoute>
+                  <UserProfile path={"/profile"} />
+                </PrivateRoute>
+              }
             />
+            <Route exact path="/adminuserpage" element={<AdminUserPage />} />
           </Routes>
         </BrowserRouter>
       )}
