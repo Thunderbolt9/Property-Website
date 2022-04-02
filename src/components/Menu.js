@@ -59,7 +59,7 @@ function Menu() {
                   id="basic-nav-dropdown"
                   className="navtext"
                 >
-                  <NavDropdown.Item href="/">Profile</NavDropdown.Item>
+                  <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/contactedproperties">
                     Contacted Properties
                   </NavDropdown.Item>
