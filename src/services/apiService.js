@@ -19,16 +19,16 @@ async function getFormData(data) {
   try {
     const formData = new FormData();
     formData.append("name", data.name);
-    formData.append("al1", data.address_line_one);
-    formData.append("al2", data.address_line_two);
+    formData.append("al1", data.al1);
+    formData.append("al2", data.al2);
     formData.append("city", data.city);
     formData.append("zipcode", data.zipcode);
-    formData.append("type", data.apartmentType);
+    formData.append("type", data.type);
     formData.append("uploadedImages", data.fileOne);
     formData.append("uploadedImages", data.fileTwo);
     formData.append("uploadedImages", data.fileThree);
-    formData.append("carea", data.carpetArea);
-    formData.append("barea", data.buildupArea);
+    formData.append("carea", data.carea);
+    formData.append("barea", data.barea);
     formData.append("price", data.price);
     formData.append("description", data.description);
     return formData;
@@ -38,7 +38,7 @@ async function getFormData(data) {
 }
 
 const exportedFunctions = {
-  //function to create resource
+  //create new property
   async createProperty(payload) {
     try {
       const formData = await getFormData(payload);
@@ -59,9 +59,95 @@ const exportedFunctions = {
     }
   },
 
-  async updateProperty() {},
+  // get all proporties
+  async getProperties() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/property`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 
+  // get specific propety by id
+  async getPropertyById(id) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/property/getPropertyById`,
+        { id: id },
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  // update property deatils
+  async updateProperty(payload, id) {
+    try {
+      console.log("update property");
+      const formData = await getFormData(payload);
+      formData.append("id", id);
+      const res = await instance.post(
+        `${API_URL}/property/update`,
+        formData,
+        headers.formHeader
+      );
+      return res.data;
+    } catch (err) {
+      if (err.response && err.response.data) {
+        let errorRes = err.response.data;
+        throw new Error(errorRes.error || errorRes.message);
+      } else {
+        console.log(err);
+        throw new Error("Something went wrong!");
+      }
+    }
+  },
+
+  // get images from the server
+  async getImages(imageArray, type) {
+    try {
+      const images = await Promise.all(
+        imageArray.map(async (image) => {
+          const imageObj = await instance.get(
+            `http://localhost:4000/${image}`,
+            { responseType: "blob" },
+            headers.jsonHeaders
+          );
+          if (type === "file") {
+            return new File([imageObj.data], "image.jpeg");
+          } else {
+            return URL.createObjectURL(imageObj.data);
+          }
+        })
+      );
+      console.log(images);
+      return images;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  //delete property
   async deleteProperty() {},
+
+  //get all users
+  async getAllUsers() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/admin/allUsers`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
 
 export default exportedFunctions;
