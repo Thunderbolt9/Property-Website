@@ -27,7 +27,7 @@ function App() {
     //on page refresh fetch user store i in redux state
     async function refreshUser() {
       try {
-        const res = await axios.get(`${API_URL}/api/v1/user/current_user`, {
+        const res = await axios.get(`${API_URL}/user/current_user`, {
           withCredentials: true,
         });
         store.dispatch({
@@ -45,11 +45,13 @@ function App() {
   }, []);
 
   //look for changes in user nd update state accordingly
-  store.subscribe(() => {
-    console.log("store updated", store.getState());
-    const obj = store.getState();
-    setUser(obj.user);
-  });
+  useEffect(() => {
+    store.subscribe(() => {
+      console.log("store updated", store.getState());
+      const obj = store.getState();
+      setUser(obj.user);
+    });
+  }, []);
 
   return (
     <AuthContext.Provider value={currentUser}>

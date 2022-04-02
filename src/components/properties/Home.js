@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Menu from "../Menu";
-import "../../css/Home.css";
 import { ReactComponent as ServiceLogo } from "../../assets/Vector.svg";
-import Footer from "../Footer";
 import { Container } from "react-bootstrap";
+import "../../css/Home.css";
+import Footer from "../Footer";
 
 function Home() {
   const navigate = useNavigate();
@@ -139,8 +139,6 @@ function Home() {
           {"Explore more >"}
         </p>
       </div>
-
-      {/* Footer */}
       <Footer />
     </>
   );
