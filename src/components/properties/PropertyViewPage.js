@@ -112,10 +112,6 @@ function PropertyViewPage() {
             </Col>
           </Row>
         </Col>
-        {/* <Col lg={1} xs={12}>
-          <div style={{ height: "15px" }}></div>
-        </Col> */}
-        {/*for spacing*/}
         <Col xs={12} md={12} lg={9}>
           <Row>
             <h3>Property Description</h3>
@@ -167,4 +163,3 @@ function PropertyViewPage() {
 }
 
 export default PropertyViewPage;
-
