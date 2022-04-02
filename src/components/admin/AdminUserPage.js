@@ -73,15 +73,13 @@ function AdminUserPage() {
                       <td>{user._id}</td>
                       <td>{user.name}</td>
                       <td>
-                        <button className="bg-primary text-white border-primary">
-                          View
-                        </button>
+                        <button className="setButton">View</button>
                       </td>
                       <td>
-                        <button className="">Update</button>
+                        <button className="setButton">Update</button>
                       </td>
                       <td>
-                        <button className="">Delete</button>
+                        <button className="setButton">Delete</button>
                       </td>
                     </tr>
                   ))}

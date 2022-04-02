@@ -21,15 +21,16 @@
   color: white;
 }
 
-.setbutton {
+.setButton {
   background-color: white;
   border: 1px solid #75a5ff;
   color: #75a5ff;
-  border-radius: 5rem;
+  border-radius: 2rem;
   font-weight: bold;
+  padding: 5px 10px;
 }
 
-.setbutton:hover {
+.setButton:hover {
   background-color: #75a5ff;
   color: white;
 }
