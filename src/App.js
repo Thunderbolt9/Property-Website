@@ -4,12 +4,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Spinner from "react-bootstrap/Spinner";
 import Home from "./components/properties/Home";
 import Login from "./components/user/Login";
+import RentPage from "./components/properties/RentPage";
 import Register from "./components/user/Register";
 import BuyerPage from "./components/properties/BuyerPage";
 import SellerPage from "./components/properties/SellerPage";
 import ContactedProperties from "./components/properties/ContactedProperty";
 import ProposedProperties from "./components/properties/ProposedPropertyPage";
 import PropertyViewPage from "./components/properties/PropertyViewPage";
+
+import AdminPropertyPage from "./components/admin/AdminPropertyPage";
 import AdminUserPage from "./components/admin/AdminUserPage";
 import PrivateRoute from "./components/PrivateRoute";
 import { API_URL } from "./config";
@@ -96,10 +99,13 @@ function App() {
               element={<EditPropertyPage />}
             />
             <Route exact path="/adminuserpage" element={<AdminUserPage />} />
+            <Route exact path="/adminpropertypage" element={<AdminPropertyPage />} />
+            <Route exact path="/rentpage" element={<RentPage />} />
           </Routes>
         </BrowserRouter>
       )}
     </AuthContext.Provider>
+
   );
 }
 
