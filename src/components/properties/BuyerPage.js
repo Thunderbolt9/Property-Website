@@ -1,4 +1,3 @@
-//IMPORTS----->
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Menu from "../Menu";
@@ -14,7 +13,6 @@ import {
 import "bootstrap/dist/css/bootstrap.min.css";
 import Footer from "../Footer";
 import "../../css/Buyerpage.css";
-
 
 //MAIN FUNCTION----->
 function BuyerPage() {
@@ -55,7 +53,7 @@ function BuyerPage() {
         <h3 className="text-center">All Properties</h3>
         <div>
           <Row>
-            <div classname="form">
+            <div className="form">
               <Form>
                 <Form.Group className="mb-5 mx-5" controlId="SelectDropdown">
                   <Row className="mt-2 ">
@@ -82,15 +80,13 @@ function BuyerPage() {
               </Form>
             </div>
           </Row>
-          {/* </Container> */}
         </div>
-        <div classname="card">
+        <div className="card">
           <Row className="g-4">
-            {currentPosts.map((post) => (
-              <Col md={6} key={post.id}>
-                <Card>
+            {currentPosts.map((post, index) => (
+              <Col md={6}>
+                <Card key={index}>
                   <Card.Img variant="top" src={post.url} />
-
                   <Card.ImgOverlay className="img-overlay">
                     <Button className="img-button">Palazo</Button>
                   </Card.ImgOverlay>
@@ -112,7 +108,6 @@ function BuyerPage() {
       <Footer />
     </>
   );
-
 }
 
 export default BuyerPage;

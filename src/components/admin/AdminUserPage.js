@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Table, Pagination, Container } from "react-bootstrap";
 import "../../css/AdminUserPage.css";
-import Menu from "../Menu";
 import Footer from "../Footer";
+import AdminMenu from "../AdminMenu";
 
 function AdminUserPage() {
   const [usersData, setUsersData] = useState(null);
@@ -36,14 +36,15 @@ function AdminUserPage() {
 
   return (
     <>
-      <Menu />
-      <Container className="headingDiv">
-        <h3>All users</h3>
-        <button className="createUserButton">Create new user</button>
-      </Container>
+      <AdminMenu />
       <Container>
+        <div className="headingDiv">
+          <h3>All users</h3>
+          <button className="createUserButton">Create new user</button>
+        </div>
+
         {usersData !== null ? (
-          <Table striped bordered hover className="userTable">
+          <Table striped bordered hover className="userTable noWrap">
             <thead>
               <tr>
                 <th>Prop Id</th>
@@ -58,10 +59,10 @@ function AdminUserPage() {
                   <td>{user.id}</td>
                   <td>{user.title}</td>
                   <td>
-                    <button className="createUserButton">Update</button>
+                    <button className="setbutton">Update</button>
                   </td>
                   <td>
-                    <button className="createUserButton">Delete</button>
+                    <button className="setbutton">Delete</button>
                   </td>
                 </tr>
               ))}
