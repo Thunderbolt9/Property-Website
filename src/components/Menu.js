@@ -38,6 +38,13 @@ function Menu() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
+            <Nav.Link href="/" className="navtext">
+              Home
+            </Nav.Link>
+            <Nav.Link href="/buyerpage" className="navtext">
+              Buy
+            </Nav.Link>
+
             {currentUser !== null ? (
               <>
                 <Nav.Link href="/sellerpage" className="navtext">

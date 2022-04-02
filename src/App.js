@@ -2,16 +2,25 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Spinner from "react-bootstrap/Spinner";
+
+// Components Imports
 import Home from "./components/properties/Home";
 import Login from "./components/user/Login";
+import RentPage from "./components/properties/RentPage";
 import Register from "./components/user/Register";
 import BuyerPage from "./components/properties/BuyerPage";
 import SellerPage from "./components/properties/SellerPage";
 import ContactedProperties from "./components/properties/ContactedProperty";
 import ProposedProperties from "./components/properties/ProposedPropertyPage";
 import PropertyViewPage from "./components/properties/PropertyViewPage";
+import AdminPropertyPage from "./components/admin/AdminPropertyPage";
 import AdminUserPage from "./components/admin/AdminUserPage";
+import AdminDashboard from "./components/admin/AdminDashboard";
+
+// Private and Admin Routes
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
+
 import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
@@ -62,12 +71,11 @@ function App() {
       ) : (
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/register" element={<Register />} />
-            <Route exact path="/buyerpage" element={<BuyerPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/buyerpage" element={<BuyerPage />} />
             <Route
-              exact
               path="/sellerpage"
               element={
                 <PrivateRoute>
@@ -76,39 +84,54 @@ function App() {
               }
             />
             <Route
-              exact
-              path="/contactedproperties"
-              element={
-                <PrivateRoute>
-                  <ContactedProperties />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              exact
-              path="/proposedproperties"
-              element={
-                <PrivateRoute>
-                  <ProposedProperties />
-                </PrivateRoute>
-              }
-            />
-            <Route
-              exact
-              path="/propertyviewpage/:id"
-              element={<PropertyViewPage />}
-            />
-
-            <Route
-              exact
               path="/profile"
               element={
                 <PrivateRoute>
-                  <UserProfile/>
+                  <UserProfile />
                 </PrivateRoute>
               }
             />
-            <Route exact path="/adminuserpage" element={<AdminUserPage />} />
+
+            <Route
+              path="/contactedproperties"
+              element={<ContactedProperties />}
+            />
+            <Route
+              path="/proposedproperties"
+              element={<ProposedProperties />}
+            />
+            <Route path="/propertyviewpage" element={<PropertyViewPage />} />
+            <Route path="/rentpage" element={<RentPage />} />
+            <Route
+              path="/admindashboard"
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <AdminDashboard />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/adminuserpage"
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <AdminUserPage />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/adminpropertypage"
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <AdminPropertyPage />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </BrowserRouter>
       )}

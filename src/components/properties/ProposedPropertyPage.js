@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Pagination, Card, Button, Row, Col } from "react-bootstrap";
@@ -80,3 +81,4 @@ function ProposedPropertyPage() {
 }
 
 export default ProposedPropertyPage;
+

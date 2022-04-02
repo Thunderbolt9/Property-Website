@@ -1,27 +1,27 @@
-.headingDiv {
+.flex-container {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 3rem;
   margin-top: 3rem;
 }
 
-.createUserButton {
+.setbutton {
   background-color: white;
   border: 1px solid #75a5ff;
   color: #75a5ff;
   border-radius: 5rem;
-  min-width: 11rem;
+  min-width: 12rem;
   min-height: 1rem;
   margin-top: 0rem;
   font-weight: bold;
 }
 
-.createUserButton:hover {
+.setbutton:hover {
   background-color: #75a5ff;
   color: white;
 }
 
-.setButton {
+.setbutton1 {
   background-color: white;
   border: 1px solid #75a5ff;
   color: #75a5ff;
@@ -30,17 +30,24 @@
   padding: 5px 10px;
 }
 
-.setButton:hover {
+.setbutton1:hover {
   background-color: #75a5ff;
   color: white;
 }
 
-.userTable {
+.table {
   text-align: center;
 }
 
-.pagination {
+.page {
   justify-content: center;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin: 4rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+@media only screen and (max-width: 500px) {
+  .noWrap {
+    white-space: nowrap;
+  }
 }
