@@ -95,7 +95,7 @@ function App() {
             />
             <Route
               exact
-              path="/propertyviewpage"
+              path="/propertyviewpage/:id"
               element={<PropertyViewPage />}
             />
 
@@ -104,7 +104,7 @@ function App() {
               path="/profile"
               element={
                 <PrivateRoute>
-                  <UserProfile path={"/profile"} />
+                  <UserProfile/>
                 </PrivateRoute>
               }
             />
