@@ -18,6 +18,7 @@
 
 .createUserButton {
   color: #75a5ff;
+  width: 7rem;
   border: 1px solid #75a5ff;
   background-color: white;
   border-radius: 5rem;
@@ -28,5 +29,6 @@
 
 .createUserButton:hover {
   background-color: #75a5ff;
+  border: 1px solid #75a5ff;
   color: white;
 }
