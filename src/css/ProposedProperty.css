@@ -1,0 +1,49 @@
+.propertyDiv {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    row-gap: 2rem;
+  }
+  
+  .propertyImage {
+    width: 34rem;
+  }
+
+  .imgOverlay {
+    margin-top: 14rem;
+  }
+  
+  .button {
+    color: #75A5FF;
+    width: 10rem;
+    border-radius: 20rem;
+  }
+
+  .button:hover {
+    background-color: #75A5FF;
+  }
+  
+  
+  @media only screen and (max-width: 500px) {
+      .propertyDiv {
+          display: flex;
+          flex-direction: column;
+          margin: auto;
+          gap: 1rem;
+        }
+      
+        .propertyImage {
+          width: 20rem;
+        }
+
+        .imgOverlay {
+          margin-top: 6rem;
+        }
+  
+        .button {
+          margin-top: 7rem;
+        }
+  }

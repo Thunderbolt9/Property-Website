@@ -24,6 +24,7 @@ import AdminRoute from "./components/AdminRoute";
 import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
+import UserProfile from "./components/properties/UserProfile";
 
 export const AuthContext = React.createContext();
 
@@ -82,6 +83,15 @@ function App() {
                 </PrivateRoute>
               }
             />
+            <Route
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <UserProfile />
+                </PrivateRoute>
+              }
+            />
+
             <Route
               path="/contactedproperties"
               element={<ContactedProperties />}
