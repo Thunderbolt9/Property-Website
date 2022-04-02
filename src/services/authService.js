@@ -50,7 +50,7 @@ const authFunctions = {
   async update(payload) {
     try {
       const res = await axios.post(
-        `${API_URL}/api/v1/user/update`,
+        `${API_URL}/user/register`,
         payload,
         { withCredentials: true },
         payloadHeader

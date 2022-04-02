@@ -50,7 +50,7 @@ function ContactedProperty() {
             <Card className="propertyImage">
               <Card.Img variant="top" src={post.url} />
               <div className="text-center">
-                <Card.ImgOverlay style={{ marginTop: '14rem'}}>
+                <Card.ImgOverlay className="imgOverlay">
                   <Button
                     variant="outline-primary"
                     size="lg"

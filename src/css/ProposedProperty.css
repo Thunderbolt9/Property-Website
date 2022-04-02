@@ -11,6 +11,10 @@
   .propertyImage {
     width: 34rem;
   }
+
+  .imgOverlay {
+    margin-top: 14rem;
+  }
   
   .button {
     color: #75A5FF;
@@ -33,6 +37,10 @@
       
         .propertyImage {
           width: 20rem;
+        }
+
+        .imgOverlay {
+          margin-top: 6rem;
         }
   
         .button {
