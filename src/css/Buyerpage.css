@@ -1,0 +1,48 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  gap: 1rem;
+}
+
+.Img {
+  width: 20rem;
+}
+
+.img-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-button {
+  text-align: center;
+  color: #75a5ff;
+  border-radius: 5rem;
+  width: 10rem;
+  height: 3rem;
+  background-color:white;
+  border-color: #75a5ff;
+}
+.img-button:hover {
+  background-color: #75a5ff;
+  color: white;
+}
+
+.Img {
+  width: 34rem;
+}
+.page {
+  justify-content: center;
+  margin: 4rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+}
+
+
