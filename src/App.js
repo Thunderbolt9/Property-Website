@@ -15,6 +15,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
+import EditPropertyPage from "./components/properties/EditPropertyPage";
 
 export const AuthContext = React.createContext();
 
@@ -86,8 +87,13 @@ function App() {
             />
             <Route
               exact
-              path="/propertyviewpage"
+              path="/propertyviewpage/:id"
               element={<PropertyViewPage />}
+            />
+            <Route
+              exact
+              path="/editpropertypage/:id"
+              element={<EditPropertyPage />}
             />
             <Route exact path="/adminuserpage" element={<AdminUserPage />} />
           </Routes>

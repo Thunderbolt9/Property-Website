@@ -11,18 +11,18 @@ import axios from "axios";
 function SellerPage() {
   const initialValues = {
     name: "",
-    address_line_one: "",
-    address_line_two: "",
+    al1: "",
+    al2: "",
     city: "",
     zipcode: "",
     fileOne: null,
     fileTwo: null,
     fileThree: null,
-    carpetArea: "",
-    buildupArea: "",
+    carea: "",
+    barea: "",
     price: "",
     description: "",
-    apartmentType: "",
+    type: "",
   };
 
   const [formValues, setFormValues] = useState(initialValues);
@@ -57,7 +57,7 @@ function SellerPage() {
           setSpinner(true);
           const res = await apiService.createProperty(formValues);
           console.log(res);
-          navigate("/propertyviewpage");
+          // navigate("/propertyviewpage");
         } catch (err) {
           setServerError({ server_error: err.message });
           setSpinner(false);
@@ -118,11 +118,11 @@ function SellerPage() {
     if (!values.name) {
       errors.name = "Property name is required!*";
     }
-    if (!values.address_line_one) {
-      errors.address_line_one = "Address is required!*";
+    if (!values.al1) {
+      errors.al1 = "Address is required!*";
     }
-    if (!values.address_line_two) {
-      errors.address_line_two = "Address is required!*";
+    if (!values.al2) {
+      errors.al2 = "Address is required!*";
     }
     if (!values.city) {
       errors.city = "City is required!*";
@@ -130,17 +130,17 @@ function SellerPage() {
     if (!values.zipcode) {
       errors.zipcode = "Zipcode is required!*";
     }
-    if (!values.apartmentType) {
-      errors.apartmentType = "Apartment type is required!*";
+    if (!values.type) {
+      errors.type = "Apartment type is required!*";
     }
     if (!values.fileOne || !values.fileTwo || !values.fileThree) {
       errors.fileOne = "You must upload all three images!*";
     }
-    if (!values.carpetArea) {
-      errors.carpetArea = "Carpet area is required!*";
+    if (!values.carea) {
+      errors.carea = "Carpet area is required!*";
     }
-    if (!values.buildupArea) {
-      errors.buildupArea = "buildup area is required!*";
+    if (!values.barea) {
+      errors.barea = "buildup area is required!*";
     }
     if (!values.price) {
       errors.price = "Price is required!*";
@@ -179,14 +179,14 @@ function SellerPage() {
           <Form.Control
             type="text"
             size="lg"
-            name="address_line_one"
+            name="al1"
             placeholder="Address Line 1"
-            value={formValues.address_line_one}
+            value={formValues.al1}
             onChange={handleChange}
-            isInvalid={formErrors.address_line_one ? true : false}
+            isInvalid={formErrors.al1 ? true : false}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            {formErrors.address_line_one}
+            {formErrors.al1}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -195,14 +195,14 @@ function SellerPage() {
           <Form.Control
             type="text"
             size="lg"
-            name="address_line_two"
+            name="al2"
             placeholder="Address Line 2"
-            value={formValues.address_line_two}
+            value={formValues.al2}
             onChange={handleChange}
-            isInvalid={formErrors.address_line_two ? true : false}
+            isInvalid={formErrors.al2 ? true : false}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            {formErrors.address_line_two}
+            {formErrors.al2}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -248,12 +248,12 @@ function SellerPage() {
           <br></br>
           <Form.Control
             hidden
-            isInvalid={formErrors.apartmentType ? true : false}
+            isInvalid={formErrors.type ? true : false}
           ></Form.Control>
           <Form.Check
             inline
             label="1 BHK"
-            name="apartmentType"
+            name="type"
             value="1 BHK"
             onChange={handleChange}
             type="radio"
@@ -262,7 +262,7 @@ function SellerPage() {
           <Form.Check
             inline
             label="2 BHK"
-            name="apartmentType"
+            name="type"
             value="2 BHK"
             onChange={handleChange}
             type="radio"
@@ -271,7 +271,7 @@ function SellerPage() {
           <Form.Check
             inline
             label="3 BHK"
-            name="apartmentType"
+            name="type"
             value="3 BHK"
             onChange={handleChange}
             type="radio"
@@ -280,7 +280,7 @@ function SellerPage() {
           <Form.Check
             inline
             label="4 BHK"
-            name="apartmentType"
+            name="type"
             value="4 BHK"
             onChange={handleChange}
             type="radio"
@@ -289,7 +289,7 @@ function SellerPage() {
           <Form.Check
             inline
             label="Villa"
-            name="apartmentType"
+            name="type"
             value="Villa"
             onChange={handleChange}
             type="radio"
@@ -298,14 +298,14 @@ function SellerPage() {
           <Form.Check
             inline
             label="Other"
-            name="apartmentType"
+            name="type"
             value="Other"
             onChange={handleChange}
             type="radio"
             id={`inline-$radio-2`}
           />
           <Form.Control.Feedback type="invalid">
-            {formErrors.apartmentType}
+            {formErrors.type}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -393,14 +393,14 @@ function SellerPage() {
           <Form.Control
             type="number"
             size="lg"
-            name="carpetArea"
+            name="carea"
             placeholder="Carpet Area"
-            value={formValues.carpetArea}
+            value={formValues.carea}
             onChange={handleChange}
-            isInvalid={formErrors.carpetArea ? true : false}
+            isInvalid={formErrors.carea ? true : false}
           ></Form.Control>
           <Form.Control.Feedback type="invalid">
-            {formErrors.carpetArea}
+            {formErrors.carea}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -411,14 +411,14 @@ function SellerPage() {
               <Form.Control
                 type="number"
                 size="lg"
-                name="buildupArea"
+                name="barea"
                 placeholder="Buildup Area"
-                value={formValues.buildupArea}
+                value={formValues.barea}
                 onChange={handleChange}
-                isInvalid={formErrors.buildupArea ? true : false}
+                isInvalid={formErrors.barea ? true : false}
               ></Form.Control>
               <Form.Control.Feedback type="invalid">
-                {formErrors.buildupArea}
+                {formErrors.barea}
               </Form.Control.Feedback>
             </Form.Group>
           </Col>
