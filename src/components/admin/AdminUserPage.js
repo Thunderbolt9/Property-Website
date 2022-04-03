@@ -44,6 +44,19 @@ function AdminUserPage() {
     }
   }
 
+  async function removeUser(id) {
+    try {
+      setSpinner(true);
+      const res = await apiService.deleteUser(id);
+      console.log(res);
+      getUserData();
+      setServerError(false);
+      setSpinner(false);
+    } catch (err) {
+      setServerError({ server_error: err.message });
+    }
+  }
+
   useEffect(() => {
     getUserData();
   }, []);
@@ -104,7 +117,14 @@ function AdminUserPage() {
                             <button className="setButton">Update</button>
                           </td>
                           <td>
-                            <button className="setButton">Delete</button>
+                            <button
+                              className="setButton"
+                              onClick={() => {
+                                removeUser(user._id);
+                              }}
+                            >
+                              Delete
+                            </button>
                           </td>
                         </tr>
                       ))}

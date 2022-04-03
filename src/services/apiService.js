@@ -228,6 +228,20 @@ const exportedFunctions = {
       console.log(err);
     }
   },
+
+  // delete specific user by id
+  async deleteUser(id) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/user/removeUser`,
+        { id: id },
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
 
 export default exportedFunctions;
