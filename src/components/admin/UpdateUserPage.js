@@ -29,13 +29,7 @@ export default function UpdateUserPage() {
         if (res.error) {
           setServerError({ server_error: res.error });
         } else {
-          store.dispatch({
-            type: "userUpdated",
-            payload: {
-              user: res.user,
-            },
-          });
-          // navigate("/profile");
+          navigate("/adminuserpage");
         }
       }
       updateUser();
