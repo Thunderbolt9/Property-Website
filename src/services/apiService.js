@@ -148,33 +148,6 @@ const exportedFunctions = {
       console.log(err);
     }
   },
-
-  // get user by id
-  async getUserById(id) {
-    try {
-      const res = await instance.post(
-        `${API_URL}/user/getUserById`,
-        { id: id },
-        headers.jsonHeaders
-      );
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
-  },
-
-  //get properties created recently
-  async getRecentProperties() {
-    try {
-      const res = await instance.get(
-        `${API_URL}/admin/recentContacted`,
-        headers.jsonHeaders
-      );
-      return res.data;
-    } catch (err) {
-      console.log(err);
-    }
-  },
 };
 
 export default exportedFunctions;

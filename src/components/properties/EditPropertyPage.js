@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
+import "../../css/PropertyViewPage.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Row, Col, Spinner } from "react-bootstrap";
 import apiService from "../../services/apiService";
-import { useNavigate } from "react-router-dom";
-import "../../css/SellerPage.css";
-import Menu from "../Menu";
-import Footer from "../Footer";
+import { useNavigate, useParams } from "react-router-dom";
 
-function SellerPage() {
+function EditPropertyPage() {
+  const { id } = useParams();
+
   const initialValues = {
     name: "",
     al1: "",
@@ -30,6 +30,7 @@ function SellerPage() {
   const [isSubmit, setIsSubmit] = useState(false);
   const [showSpinner, setSpinner] = useState(false);
   const [serverError, setServerError] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const fileone = React.createRef();
   const filetwo = React.createRef();
@@ -49,25 +50,47 @@ function SellerPage() {
   const defaultBackGround =
     "https://cdn.pixabay.com/photo/2018/11/13/21/44/instagram-3814061_1280.png";
 
+  useEffect(() => {
+    async function getPropertyById() {
+      try {
+        const data = await apiService.getPropertyById(id);
+        console.log(data.Property);
+        const images = await apiService.getImages(data.Property.images, "file");
+        const property = data.Property;
+        property.fileOne = images[0];
+        property.fileTwo = images[1];
+        property.fileThree = images[2];
+        setFormValues(data.Property);
+      } catch (err) {
+        console.log(err);
+      }
+      setLoading(false);
+    }
+    getPropertyById();
+  }, []);
+
   // Form data avaialble here
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      async function createProperty() {
+      async function updateProperty() {
         try {
+          console.log(formValues.fileThree, formValues.fileTwo);
           setSpinner(true);
-          const res = await apiService.createProperty(formValues);
-          setSpinner(false);
-          // navigate("/propertyviewpage");
+          const res = await apiService.updateProperty(
+            formValues,
+            formValues._id
+          );
+          console.log(res);
         } catch (err) {
           setServerError({ server_error: err.message });
           setSpinner(false);
           setIsSubmit(false);
         }
       }
-      createProperty();
+      updateProperty();
     }
     // update only when there is change in formerrors
-  }, [formErrors, formValues, isSubmit, navigate]);
+  }, [formErrors]);
 
   const handleFile = (refname) => {
     if (refname === "fileone") {
@@ -136,12 +159,16 @@ function SellerPage() {
     return errors;
   };
 
-  return (
-    <>
-      <Menu />
+  if (loading) {
+    return <p>...loading</p>;
+  } else {
+    return (
       <div className="sell-form-container">
-        <Form onSubmit={handleSubmit} className="sell-form shadow-sm form-bg">
-          <h3 className="text-center">Sell Property</h3>
+        <Form
+          onSubmit={handleSubmit}
+          className="d-flex flex-column gap-4 shadow-sm form-bg p-3"
+        >
+          <h3 className="text-center">Edit Property</h3>
           <Form.Group>
             <Form.Label>Property Name</Form.Label>
             <Form.Control
@@ -181,7 +208,7 @@ function SellerPage() {
               size="lg"
               name="al2"
               placeholder="Address Line 2"
-              value={formValues.ad2}
+              value={formValues.al2}
               onChange={handleChange}
               isInvalid={formErrors.al2 ? true : false}
             ></Form.Control>
@@ -239,6 +266,7 @@ function SellerPage() {
               label="1 BHK"
               name="type"
               value="1 BHK"
+              checked={formValues.type === "1 BHK" ? true : false}
               onChange={handleChange}
               type="radio"
               id={`inline-$radio-1`}
@@ -248,6 +276,7 @@ function SellerPage() {
               label="2 BHK"
               name="type"
               value="2 BHK"
+              checked={formValues.type === "2 BHK" ? true : false}
               onChange={handleChange}
               type="radio"
               id={`inline-$radio-2`}
@@ -257,6 +286,7 @@ function SellerPage() {
               label="3 BHK"
               name="type"
               value="3 BHK"
+              checked={formValues.type === "3 BHK" ? true : false}
               onChange={handleChange}
               type="radio"
               id={`inline-$radio-2`}
@@ -266,6 +296,7 @@ function SellerPage() {
               label="4 BHK"
               name="type"
               value="4 BHK"
+              checked={formValues.type === "4 BHK" ? true : false}
               onChange={handleChange}
               type="radio"
               id={`inline-$radio-2`}
@@ -275,6 +306,7 @@ function SellerPage() {
               label="Villa"
               name="type"
               value="Villa"
+              checked={formValues.type === "Villa" ? true : false}
               onChange={handleChange}
               type="radio"
               id={`inline-$radio-2`}
@@ -284,6 +316,7 @@ function SellerPage() {
               label="Other"
               name="type"
               value="Other"
+              checked={formValues.type === "Other" ? true : false}
               onChange={handleChange}
               type="radio"
               id={`inline-$radio-2`}
@@ -293,7 +326,7 @@ function SellerPage() {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group className="input-lg" style={{ cursor: "pointer" }}>
+          <Form.Group className="input-lg">
             <Form.Label>Upload Images</Form.Label>
             <Form.Control
               hidden
@@ -454,16 +487,19 @@ function SellerPage() {
           )}
 
           <div className="text-center">
-            <Button type="submit" size="lg" className="submitSellButton">
+            <Button
+              type="submit"
+              variant="outline-primary"
+              size="lg"
+              className="auth-button"
+            >
               Submit
             </Button>
           </div>
         </Form>
       </div>
-      <Footer />
-    </>
-  );
+    );
+  }
 }
 
-export default SellerPage;
-
+export default EditPropertyPage;
