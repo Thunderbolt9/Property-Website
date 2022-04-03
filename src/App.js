@@ -27,6 +27,7 @@ import AdminRoute from "./components/AdminRoute";
 import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
+import CreateNewUser from "./components/admin/CreateNewUser";
 
 export const AuthContext = React.createContext();
 
@@ -113,7 +114,16 @@ function App() {
                 </PrivateRoute>
               }
             />
-
+            <Route
+              path="/createnewuser"
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <CreateNewUser />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
+            />
             <Route
               path="/viewuserprofile/:id"
               element={

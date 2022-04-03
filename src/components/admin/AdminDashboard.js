@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Container, Row, Table } from "react-bootstrap";
+import { Col, Container, Row, Table, Spinner } from "react-bootstrap";
 import { PieChart, Pie, Tooltip } from "recharts";
 import apiService from "../../services/apiService";
 import AdminMenu from "../AdminMenu";
@@ -7,6 +7,7 @@ import Footer from "../Footer";
 import "../../css/AdminDashboard.css";
 
 function AdminDashboard() {
+  const [showSpinner, setSpinner] = useState(false);
   const [serverError, setServerError] = useState(null);
   const [mostContacted, setMostContacted] = useState(null);
   const [recentlyCreated, setRecentlyCreated] = useState(null);
@@ -17,6 +18,7 @@ function AdminDashboard() {
 
   async function getDashboardData() {
     try {
+      setSpinner(true);
       const resContactProps = await apiService.getMostContacted();
       const resRecentProps = await apiService.getRecentlyCreated();
       const resAllProps = await apiService.getProperties();
@@ -79,7 +81,7 @@ function AdminDashboard() {
       setMinPrice(MinPrice);
       setMaxPrice(MaxPrice);
       setAvgPrice(sumOfPrice / lengthOfAllProperty);
-
+      setSpinner(false);
       setServerError(false);
     } catch (err) {
       setServerError({ server_error: err.message });
@@ -92,128 +94,137 @@ function AdminDashboard() {
 
   return (
     <>
-      <AdminMenu />
-
-      {mostContacted !== null &&
-      recentlyCreated !== null &&
-      serverError === false &&
-      pieChartData !== null ? (
-        <>
-          <Container className="priceContainer" style={{ marginTop: "5rem" }}>
-            <Row>
-              <Col className="divBorder">
-                <div>
-                  <h4>Min Price</h4>
-                  <h1 style={{ color: "#75a5ff" }}>
-                    {minPrice
-                      .toString()
-                      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-                  </h1>
-                </div>
-              </Col>
-              <Col className="divBorder">
-                <div>
-                  <h3>Avg Price</h3>
-                  <h1 style={{ color: "#75a5ff" }}>
-                    {Math.round(avgPrice)
-                      .toString()
-                      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-                  </h1>
-                </div>
-              </Col>
-              <Col>
-                <div>
-                  <h3>Max Price</h3>
-                  <h1 style={{ color: "#75a5ff" }}>
-                    {maxPrice
-                      .toString()
-                      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
-                  </h1>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-
-          <Container style={{ marginTop: "4rem", textAlign: "Center" }}>
-            <Row>
-              <Col>
-                <h4 className="mb-3">Users Information</h4>
-                <PieChart width={400} height={325} className="border">
-                  <Pie
-                    dataKey="value"
-                    isAnimationActive={false}
-                    data={pieChartData}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={130}
-                    fill="#75A5FF"
-                    label
-                  />
-                  <Tooltip />
-                </PieChart>
-              </Col>
-              <Col sm={8}>
-                <h4>Most Contacted</h4>
-                <Table striped bordered hover className="mt-3 noWrap">
-                  <thead>
-                    <tr>
-                      <th>Property Id</th>
-                      <th>Property Name</th>
-                      <th>City</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {mostContacted.map((property, index) => (
-                      <tr key={index}>
-                        <td>{property._id}</td>
-                        <td>{property.name}</td>
-                        <td>{property.city}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </Col>
-            </Row>
-          </Container>
-
-          <Container
-            style={{
-              marginTop: "4rem",
-              textAlign: "Center",
-              marginBottom: "4rem",
-            }}
-          >
-            <Row>
-              <Col></Col>
-              <Col sm={8}>
-                <h4>Recently Created</h4>
-                <Table striped bordered hover className="mt-3 noWrap">
-                  <thead>
-                    <tr>
-                      <th>Property Id</th>
-                      <th>Property Name</th>
-                      <th>City</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {recentlyCreated.map((property, index) => (
-                      <tr key={index}>
-                        <td>{property._id}</td>
-                        <td>{property.name}</td>
-                        <td>{property.city}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </Col>
-            </Row>
-          </Container>
-        </>
+      {showSpinner ? (
+        <div className="text-center">
+          <Spinner animation="border" variant="primary" />
+        </div>
       ) : (
-        <h1>{serverError}</h1>
-      )}
+        <>
+          {mostContacted !== null &&
+          recentlyCreated !== null &&
+          serverError === false &&
+          pieChartData !== null ? (
+            <>
+              <AdminMenu />
+              <Container
+                className="priceContainer"
+                style={{ marginTop: "5rem" }}
+              >
+                <Row>
+                  <Col className="divBorder">
+                    <div>
+                      <h4>Min Price</h4>
+                      <h1 style={{ color: "#75a5ff" }}>
+                        {minPrice
+                          .toString()
+                          .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                      </h1>
+                    </div>
+                  </Col>
+                  <Col className="divBorder">
+                    <div>
+                      <h3>Avg Price</h3>
+                      <h1 style={{ color: "#75a5ff" }}>
+                        {Math.round(avgPrice)
+                          .toString()
+                          .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                      </h1>
+                    </div>
+                  </Col>
+                  <Col>
+                    <div>
+                      <h3>Max Price</h3>
+                      <h1 style={{ color: "#75a5ff" }}>
+                        {maxPrice
+                          .toString()
+                          .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}
+                      </h1>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
 
-      <Footer />
+              <Container style={{ marginTop: "4rem", textAlign: "Center" }}>
+                <Row>
+                  <Col>
+                    <h4 className="mb-3">Users Information</h4>
+                    <PieChart width={400} height={325} className="border">
+                      <Pie
+                        dataKey="value"
+                        isAnimationActive={false}
+                        data={pieChartData}
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={130}
+                        fill="#75A5FF"
+                        label
+                      />
+                      <Tooltip />
+                    </PieChart>
+                  </Col>
+                  <Col sm={8}>
+                    <h4>Most Contacted</h4>
+                    <Table striped bordered hover className="mt-3 noWrap">
+                      <thead>
+                        <tr>
+                          <th>Property Id</th>
+                          <th>Property Name</th>
+                          <th>City</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {mostContacted.map((property, index) => (
+                          <tr key={index}>
+                            <td>{property._id}</td>
+                            <td>{property.name}</td>
+                            <td>{property.city}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+              </Container>
+
+              <Container
+                style={{
+                  marginTop: "4rem",
+                  textAlign: "Center",
+                  marginBottom: "4rem",
+                }}
+              >
+                <Row>
+                  <Col></Col>
+                  <Col sm={8}>
+                    <h4>Recently Created</h4>
+                    <Table striped bordered hover className="mt-3 noWrap">
+                      <thead>
+                        <tr>
+                          <th>Property Id</th>
+                          <th>Property Name</th>
+                          <th>City</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {recentlyCreated.map((property, index) => (
+                          <tr key={index}>
+                            <td>{property._id}</td>
+                            <td>{property.name}</td>
+                            <td>{property.city}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </Col>
+                </Row>
+              </Container>
+              <Footer />
+            </>
+          ) : (
+            <h1>{serverError}</h1>
+          )}
+        </>
+      )}
     </>
   );
 }
