@@ -11,7 +11,6 @@ import SellerPage from "./components/properties/SellerPage";
 import ContactedProperties from "./components/properties/ContactedProperty";
 import ProposedProperties from "./components/properties/ProposedPropertyPage";
 import PropertyViewPage from "./components/properties/PropertyViewPage";
-
 import AdminPropertyPage from "./components/admin/AdminPropertyPage";
 import AdminUserPage from "./components/admin/AdminUserPage";
 import PrivateRoute from "./components/PrivateRoute";
@@ -99,13 +98,16 @@ function App() {
               element={<EditPropertyPage />}
             />
             <Route exact path="/adminuserpage" element={<AdminUserPage />} />
-            <Route exact path="/adminpropertypage" element={<AdminPropertyPage />} />
+            <Route
+              exact
+              path="/adminpropertypage"
+              element={<AdminPropertyPage />}
+            />
             <Route exact path="/rentpage" element={<RentPage />} />
           </Routes>
         </BrowserRouter>
       )}
     </AuthContext.Provider>
-
   );
 }
 
