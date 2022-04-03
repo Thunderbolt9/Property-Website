@@ -3,8 +3,6 @@ import "../../css/SellerPage.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { Row, Col } from "react-bootstrap";
-import store from "../../redux/store";
-import axios from "axios";
 import "../../css/RentPage.css";
 
 function RentPage() {
@@ -61,20 +59,6 @@ function RentPage() {
       filethree.current.click();
     }
   };
-
-  async function handleLogout() {
-    await axios.post(
-      "http://localhost:4000/api/v1/user/logout",
-      {},
-      { withCredentials: true }
-    );
-    store.dispatch({
-      type: "userDeleted",
-      payload: {
-        user: null,
-      },
-    });
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;

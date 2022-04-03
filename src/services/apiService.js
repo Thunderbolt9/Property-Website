@@ -148,6 +148,19 @@ const exportedFunctions = {
     }
   },
 
+  //get all users
+  async getAllUsers() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/admin/allUsers`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   //getUserById
   async getUserById(id) {
     try {

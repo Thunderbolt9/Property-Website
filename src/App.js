@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Spinner from "react-bootstrap/Spinner";
+
+// Components Imports
 import Home from "./components/properties/Home";
 import Login from "./components/user/Login";
 import RentPage from "./components/properties/RentPage";
@@ -13,11 +15,17 @@ import ProposedProperties from "./components/properties/ProposedPropertyPage";
 import PropertyViewPage from "./components/properties/PropertyViewPage";
 import AdminPropertyPage from "./components/admin/AdminPropertyPage";
 import AdminUserPage from "./components/admin/AdminUserPage";
+import AdminDashboard from "./components/admin/AdminDashboard";
+import EditPropertyPage from "./components/properties/EditPropertyPage";
+import UserProfile from "./components/properties/UserProfile";
+
+// Private and Admin Routes
 import PrivateRoute from "./components/PrivateRoute";
+import AdminRoute from "./components/AdminRoute";
+
 import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
-import EditPropertyPage from "./components/properties/EditPropertyPage";
 
 export const AuthContext = React.createContext();
 
@@ -64,12 +72,11 @@ function App() {
       ) : (
         <BrowserRouter>
           <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route exact path="/login" element={<Login />} />
-            <Route exact path="/register" element={<Register />} />
-            <Route exact path="/buyerpage" element={<BuyerPage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/buyerpage" element={<BuyerPage />} />
             <Route
-              exact
               path="/sellerpage"
               element={
                 <PrivateRoute>
@@ -78,32 +85,68 @@ function App() {
               }
             />
             <Route
-              exact
+              path="/profile"
+              element={
+                <PrivateRoute>
+                  <UserProfile />
+                </PrivateRoute>
+              }
+            />
+
+            <Route
               path="/contactedproperties"
               element={<ContactedProperties />}
             />
             <Route
-              exact
               path="/proposedproperties"
               element={<ProposedProperties />}
             />
+            <Route path="/propertyviewpage" element={<PropertyViewPage />} />
+            <Route path="/rentpage" element={<RentPage />} />
             <Route
-              exact
+              path="/admindashboard"
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <AdminDashboard />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/adminuserpage"
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <AdminUserPage />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
+            />
+            <Route
               path="/propertyviewpage/:id"
               element={<PropertyViewPage />}
             />
             <Route
-              exact
               path="/editpropertypage/:id"
               element={<EditPropertyPage />}
             />
+
             <Route exact path="/adminuserpage" element={<AdminUserPage />} />
+
+            <Route exact path="/rentpage" element={<RentPage />} />
+
             <Route
               exact
               path="/adminpropertypage"
-              element={<AdminPropertyPage />}
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <AdminPropertyPage />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
             />
-            <Route exact path="/rentpage" element={<RentPage />} />
           </Routes>
         </BrowserRouter>
       )}

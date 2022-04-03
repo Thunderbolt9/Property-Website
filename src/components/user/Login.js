@@ -42,7 +42,11 @@ function Login(props) {
   //update only when threr is change in formErrors
 
   if (currentUser) {
-    return <Navigate to="/"></Navigate>;
+    if (currentUser.role !== "Admin") {
+      return <Navigate to="/"></Navigate>;
+    } else {
+      return <Navigate to="/admindashboard"></Navigate>;
+    }
   }
 
   const handleChange = (e) => {
@@ -120,11 +124,6 @@ function Login(props) {
             <Button type="submit" className="createUserButton">
               Login
             </Button>
-          </div>
-          <div className="text-center text-muted">
-            <a href="/" className="text-decoration-none">
-              Forgot Password?
-            </a>
           </div>
           <hr className="m-0" />
           <div className="text-center text-muted">
