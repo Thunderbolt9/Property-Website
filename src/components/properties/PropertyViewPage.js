@@ -82,7 +82,23 @@ function PropertyViewPage() {
       setLoading(false);
     }
     getPropertyById();
-  }, []);
+  }, [id]);
+
+  const buildCards = () => {
+    const list = contacterList.map((item) => {
+      return (
+        <Row>
+          <Card>
+            <Card.Body>
+              <Card.Title>Name: {item.name}</Card.Title>
+              <Card.Text>Email: {item.email}</Card.Text>
+            </Card.Body>
+          </Card>
+        </Row>
+      );
+    });
+    return list;
+  };
 
   const buildCards = () => {
     const list = contacterList.map((item) => {

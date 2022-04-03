@@ -39,7 +39,7 @@ function ContactedProperty() {
       setLoading(false);
     }
     getContactedProperties();
-  }, []);
+  }, [property]);
 
   const handleClick = (id) => {
     navigate(`/propertyviewpage/${id}`);

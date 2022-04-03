@@ -1,23 +1,22 @@
 .formDiv {
-    background-color: #F8F5F5;
-    width: 88%;
-    margin: auto;
-    padding: 4rem;
-    border-radius: 1rem;
-    margin-top: 2rem;
-    margin-bottom: 5rem;
+  background-color: #f8f5f5;
+  width: 50%;
+  margin: auto;
+  padding: 4rem;
+  border-radius: 1rem;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 .button {
-    width: 10rem;
-    border-radius: 20rem;
-    margin-right: 1rem;
-    margin-left: 1rem;
-    margin-top: 2rem;
-    background-color: #FFFFFF;
+  width: 10rem;
+  border-radius: 20rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-top: 2rem;
+  background-color: #ffffff;
 }
 
 .button:hover {
-    background-color: #75A5FF;
-  }
-
+  background-color: #75a5ff;
+}

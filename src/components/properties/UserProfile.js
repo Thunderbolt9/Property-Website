@@ -14,6 +14,8 @@ export default function UserProfile() {
   const [serverError, setServerError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
+  console.log(serverError);
+
   const currentUser = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -55,7 +57,7 @@ export default function UserProfile() {
       }
       updateUser();
     }
-  }, [formErrors]);
+  }, [formErrors, formValues, isSubmit, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -88,6 +90,7 @@ export default function UserProfile() {
     }
     return errors;
   };
+
   return (
     <div>
       <Menu />

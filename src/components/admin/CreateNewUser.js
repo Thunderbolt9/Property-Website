@@ -1,16 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import authService from "../../services/authService";
-import { useNavigate, Navigate, NavLink } from "react-router-dom";
-import { AuthContext } from "../../App";
-import store from "../../redux/store";
+import { useNavigate, NavLink } from "react-router-dom";
+
 import "../../css/auth.css";
 import "../../css/Menu.css";
-import Menu from "../Menu";
 import Footer from "../Footer";
+import AdminMenu from "../AdminMenu";
 
-function Register() {
+function CreateNewUser() {
   const initialValues = {
     name: "",
     phone: "",
@@ -22,7 +21,6 @@ function Register() {
   const [formErrors, setFormErrors] = useState({});
   const [serverError, setServerError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const currentUser = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -35,23 +33,13 @@ function Register() {
           setServerError({ server_error: res.error });
           setIsSubmit(false);
         } else {
-          store.dispatch({
-            type: "userAdded",
-            payload: {
-              user: res.user,
-            },
-          });
-          navigate("/");
+          navigate("/adminuserpage");
         }
       }
       registerUser();
     }
   }, [formErrors, formValues, isSubmit, navigate]);
   //update only when threre is change in formErrors
-
-  if (currentUser !== null) {
-    return <Navigate to="/"></Navigate>;
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -99,13 +87,13 @@ function Register() {
 
   return (
     <>
-      <Menu />
+      <AdminMenu />
       <div className="auth-form-container">
         <Form
           onSubmit={handleSubmit}
           className="p-4 d-flex flex-column gap-3 shadow-sm form-bg"
         >
-          <h3 className="text-center">Register</h3>
+          <h3 className="text-center">Create a new user</h3>
 
           <Form.Group>
             <Form.Control
@@ -204,4 +192,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default CreateNewUser;
