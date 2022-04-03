@@ -18,6 +18,7 @@ import AdminUserPage from "./components/admin/AdminUserPage";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import EditPropertyPage from "./components/properties/EditPropertyPage";
 import UserProfile from "./components/properties/UserProfile";
+import ViewUserProfile from "./components/admin/ViewUserProfile";
 
 // Private and Admin Routes
 import PrivateRoute from "./components/PrivateRoute";
@@ -112,6 +113,18 @@ function App() {
                 </PrivateRoute>
               }
             />
+
+            <Route
+              path="/viewuserprofile/:id"
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <ViewUserProfile />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
+            />
+
             <Route
               path="/adminuserpage"
               element={

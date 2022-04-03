@@ -148,6 +148,20 @@ const exportedFunctions = {
       console.log(err);
     }
   },
+
+  // get specific propety by id
+  async getUserById(id) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/user/getUserById`,
+        { id: id },
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
 
 export default exportedFunctions;
