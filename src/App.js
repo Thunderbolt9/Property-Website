@@ -133,7 +133,8 @@ function App() {
               path="/editpropertypage/:id"
               element={<EditPropertyPage />}
             />
-
+                
+             <Route
               path="/adminpropertypage"
               element={
                 <PrivateRoute>
