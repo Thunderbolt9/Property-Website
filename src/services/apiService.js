@@ -134,7 +134,18 @@ const exportedFunctions = {
   },
 
   //delete property
-  async deleteProperty() {},
+  async deleteProperty(id) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/property/remove`,
+        { id: id },
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 
   //get all users
   async getAllUsers() {
@@ -149,12 +160,67 @@ const exportedFunctions = {
     }
   },
 
-  // get specific propety by id
+  //getUserById
   async getUserById(id) {
     try {
       const res = await instance.post(
         `${API_URL}/user/getUserById`,
         { id: id },
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async contactProperty(propertyId) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/property/contact`,
+        {
+          id: propertyId,
+        },
+        headers.jsonHeaders
+      );
+      console.log("contacted property", res.data);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async getContactersInfo(contactorArray) {
+    try {
+      const data = await Promise.all(
+        contactorArray.map(async (item) => {
+          return await exportedFunctions.getUserById(item);
+        })
+      );
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  // Get Most Contacted Properties
+  async getMostContacted() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/admin/mostContacted`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  // Get Recent Properties
+  async getRecentlyCreated() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/admin/recentContacted`,
         headers.jsonHeaders
       );
       return res.data;

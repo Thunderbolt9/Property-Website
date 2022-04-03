@@ -14,6 +14,7 @@ export default function ViewUserProfile() {
   async function getSpecificUser() {
     try {
       const res = await apiService.getUserById(id);
+      console.log(res);
       setUser(res);
     } catch (err) {
       console.log({ server_error: err.message });

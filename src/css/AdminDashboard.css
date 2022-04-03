@@ -1,0 +1,10 @@
+.priceContainer {
+  border: 1px solid;
+  text-align: center;
+  padding: 0rem;
+  border-radius: 0.5rem;
+}
+
+.divBorder {
+  border-right: 1px solid;
+}

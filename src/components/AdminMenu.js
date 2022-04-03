@@ -38,7 +38,7 @@ function AdminMenu() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav>
-            <Nav.Link href="/" className="navtext">
+            <Nav.Link href="/admindashboard" className="navtext">
               Dashboard
             </Nav.Link>
             <Nav.Link href="/adminpropertypage" className="navtext">

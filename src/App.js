@@ -144,7 +144,10 @@ function App() {
               element={<EditPropertyPage />}
             />
 
+            <Route exact path="/rentpage" element={<RentPage />} />
+
             <Route
+              exact
               path="/adminpropertypage"
               element={
                 <PrivateRoute>
