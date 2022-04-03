@@ -16,113 +16,6 @@ function PropertyViewPage() {
   const [images, setImages] = useState(null);
   const [loading, setLoading] = useState(true);
 
-<<<<<<< HEAD
-              <Carousel.Caption>
-                <h3>Third slide label</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
-        </Col>
-      </Row>
-      <Row className="pt-2 gap-5">
-        <Col>
-          <Row>
-            <Col>
-              <h3>Quick Summery</h3>
-            </Col>
-          </Row>
-          <Row className="property-info">
-            <Col>
-              <table>
-                <tbody>
-                  <tr>
-                    <td align="left">
-                      <span className="quick-summery-heading">Price:</span>
-                    </td>
-                    <td align="right">1 crore</td>
-                  </tr>
-                  <tr>
-                    <td align="left">
-                      <span className="quick-summery-heading">Location:</span>
-                    </td>
-                    <td align="right">Mumbai</td>
-                  </tr>
-                  <tr>
-                    <td align="left">
-                      <span className="quick-summery-heading">Type:</span>
-                    </td>
-                    <td align="right">Mumbai</td>
-                  </tr>
-                  <tr>
-                    <td align="left">
-                      <span className="quick-summery-heading">City:</span>
-                    </td>
-                    <td align="right">Mumbai</td>
-                  </tr>
-                  <tr>
-                    <td align="left">
-                      <span className="quick-summery-heading">Area:</span>
-                    </td>
-                    <td align="right">Mumbai</td>
-                  </tr>
-                </tbody>
-              </table>
-            </Col>
-          </Row>
-        </Col>
-        <Col xs={12} md={12} lg={9}>
-          <Row>
-            <h3>Property Description</h3>
-          </Row>
-          <Row className="property-info">
-            <Col>
-              <p>
-                Contrary to popular belief, Lorem Ipsum is not simply random
-                text. It has roots in a piece of classical Latin literature from
-                45 BC, making it over 2000 years old. Richard McClintock, a
-                Latin professor at Hampden-Sydney College in Virginia, looked up
-                one of the more obscure Latin words, consectetur, from a Lorem
-                Ipsum passage, and going through the cites of the word in
-                classical literature, discovered the undoubtable source. Lorem
-                Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus
-                Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero,
-                written in 45 BC. This book is a treatise on the theory of
-                ethics, very popular during the Renaissance. The first line of
-                Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line
-                in section 1.10.32. The standard chunk of Lorem Ipsum used since
-                the 1500s is reproduced below for those interested. Sections
-                1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by
-                Cicero are also reproduced in their exact original form,
-                accompanied by English versions from the 1914 translation by H.
-                Rackham.
-              </p>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-      <Row className="mt-3">
-        <Col>
-          <h3>Contact Seller</h3>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          <Button
-            className="contact-button"
-            variant="outline-primary"
-            size="lg"
-          >
-            Contact
-          </Button>
-        </Col>
-      </Row>
-    </Container>
-  );
-=======
   useEffect(() => {
     async function getPropertyById() {
       try {
@@ -139,7 +32,7 @@ function PropertyViewPage() {
       setLoading(false);
     }
     getPropertyById();
-  }, []);
+  }, [id]);
 
   const buildImages = () => {
     let imageItems =
@@ -278,7 +171,6 @@ function PropertyViewPage() {
       </Container>
     );
   }
->>>>>>> 700e7384c64410502cba5c16293f44f977f664f4
 }
 
 export default PropertyViewPage;

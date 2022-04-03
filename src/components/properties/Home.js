@@ -1,55 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ReactComponent as ServiceLogo } from "../../assets/Vector.svg";
 import { Container } from "react-bootstrap";
 import "../../css/Home.css";
 import Footer from "../Footer";
 import Menu from "../Menu";
-import apiService from "../../services/apiService";
+// import apiService from "../../services/apiService";
 
 function Home() {
   const navigate = useNavigate();
-  const [images, setImages] = useState(null);
+  // const [images, setImages] = useState(null);
   const [recentProperties, setRecentProperties] = useState(null);
-  const [serverError, setServerError] = useState(false);
+  // const [serverError, setServerError] = useState(false);
 
   console.log(recentProperties);
 
-  async function getRecentProperties() {
-    try {
-      const res = await apiService.getRecentProperties();
-      console.log(res.Properties[0].images);
+  // async function getRecentProperties() {
+  //   try {
+  //     const res = await apiService.getRecentProperties();
+  //     console.log(res.Properties[0].images);
 
-      const imgUrl1 = await apiService.getImages(
-        res.Properties[0].images,
-        "Url"
-      );
+  //     const imgUrl1 = await apiService.getImages(
+  //       res.Properties[0].images,
+  //       "Url"
+  //     );
 
-      const imgUrl2 = await apiService.getImages(
-        res.Properties[1].images,
-        "Url"
-      );
+  //     const imgUrl2 = await apiService.getImages(
+  //       res.Properties[1].images,
+  //       "Url"
+  //     );
 
-      console.log(imgUrl1);
-      setRecentProperties({
-        property1: {
-          propId: res.Properties[0]._id,
-          imageUrl: res.Properties[0].images,
-        },
-        property2: {
-          propId: res.Properties[1]._id,
-          imageUrl: res.Properties[1].images,
-        },
-      });
-      setServerError(false);
-    } catch (err) {
-      setServerError({ server_error: err.message });
-    }
-  }
+  //     console.log(imgUrl1);
+  //     setRecentProperties({
+  //       property1: {
+  //         propId: res.Properties[0]._id,
+  //         imageUrl: res.Properties[0].images,
+  //       },
+  //       property2: {
+  //         propId: res.Properties[1]._id,
+  //         imageUrl: res.Properties[1].images,
+  //       },
+  //     });
+  //     setServerError(false);
+  //   } catch (err) {
+  //     setServerError({ server_error: err.message });
+  //   }
+  // }
 
-  useEffect(() => {
-    getRecentProperties();
-  }, []);
+  // useEffect(() => {
+  //   getRecentProperties();
+  // }, []);
 
   return (
     <>

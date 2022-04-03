@@ -14,8 +14,9 @@ export default function UserProfile() {
   const [serverError, setServerError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
+  console.log(serverError);
+
   const currentUser = useContext(AuthContext);
-  // const [role, setRole] = useState(currentUser.role);
   const navigate = useNavigate();
 
   const initialValues = {
@@ -38,15 +39,15 @@ export default function UserProfile() {
           store.dispatch({
             type: "userUpdated",
             payload: {
-              user: res.user
-            }
+              user: res.user,
+            },
           });
           navigate("/profile");
+        }
       }
-    }
       updateUser();
     }
-  }, [formErrors]);
+  }, [formErrors, formValues, isSubmit, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,6 +81,7 @@ export default function UserProfile() {
     }
     return errors;
   };
+
   return (
     <div>
       <Menu />
@@ -98,7 +100,7 @@ export default function UserProfile() {
               isInvalid={formErrors.name ? true : false}
             />
             <Form.Control.Feedback type="invalid">
-                {formErrors.name}
+              {formErrors.name}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -113,7 +115,7 @@ export default function UserProfile() {
               isInvalid={formErrors.email ? true : false}
             />
             <Form.Control.Feedback type="invalid">
-                {formErrors.email}
+              {formErrors.email}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -128,16 +130,18 @@ export default function UserProfile() {
               isInvalid={formErrors.phone}
             />
             <Form.Control.Feedback type="invalid">
-                {formErrors.phone}
+              {formErrors.phone}
             </Form.Control.Feedback>
           </Form.Group>
-          {currentUser.role === "Normal" ? (
-            ""
-          ) : (
+          {/* {currentUser.role === "Normal"  ? null : (
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label="Make Admin" disabled={disable}/>
+              <Form.Check
+                type="checkbox"
+                label="Make Admin"
+                disabled={disable}
+              />
             </Form.Group>
-          )}
+          )} */}
 
           <Form.Group className="text-center">
             <Button

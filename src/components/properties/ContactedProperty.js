@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Pagination, Card, Button, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Menu from "../Menu";
@@ -16,14 +15,6 @@ function ContactedProperty() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // const fetchPosts = async () => {
-    //   const res = await axios.get(
-    //     "https://jsonplaceholder.typicode.com/photos"
-    //   );
-    //   setProperty(res.data);
-    // };
-    // fetchPosts();
-
     async function getContactedProperties() {
       try {
         const data = await apiService.getContactedProperties();
@@ -40,7 +31,7 @@ function ContactedProperty() {
       setLoading(false);
     }
     getContactedProperties();
-  }, []);
+  }, [property]);
 
   const buildImages = () => {
     let imageItems =

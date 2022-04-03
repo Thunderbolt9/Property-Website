@@ -5,12 +5,14 @@ import "../../css/AdminUserPage.css";
 import apiService from "../../services/apiService";
 import Footer from "../Footer";
 import AdminMenu from "../AdminMenu";
+import { useNavigate } from "react-router-dom";
 
 function AdminUserPage() {
   const [usersData, setUsersData] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [dataPerPage] = useState(10);
   const [serverError, setServerError] = useState(false);
+  const navigate = useNavigate();
 
   const pageNumbers = [];
 
@@ -73,7 +75,14 @@ function AdminUserPage() {
                       <td>{user._id}</td>
                       <td>{user.name}</td>
                       <td>
-                        <button className="setButton">View</button>
+                        <button
+                          className="setButton"
+                          onClick={() => {
+                            navigate(`/viewuserprofile/${user._id}`);
+                          }}
+                        >
+                          View
+                        </button>
                       </td>
                       <td>
                         <button className="setButton">Update</button>
