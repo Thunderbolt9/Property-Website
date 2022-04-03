@@ -4,27 +4,35 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Menu from "../Menu";
 import Footer from "../Footer";
 import "../../css/ContactedProperty.css";
-import Carousel from "react-bootstrap/Carousel";
 import apiService from "../../services/apiService";
+import Spinner from "react-bootstrap/Spinner";
+import { useNavigate } from "react-router-dom";
 
 function ContactedProperty() {
   const [property, setProperty] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(500);
-  const [images, setImages] = useState(null);
+  const [propertyPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getContactedProperties() {
       try {
-        const data = await apiService.getContactedProperties();
-        const images = await apiService.getImages(
-          data.Property.images,
-          "imageUrl"
-        );
-        setImages(images);
-        setProperty(data.Property);
-        console.log(property);
+        const datas = await apiService.getContactedProperties();
+        if (datas.message.length > 0) {
+          const imageItems = await Promise.all(
+            datas.message.map(async (data) => {
+              const image = await apiService.getImages(
+                [data.images[0]],
+                "imageUrl"
+              );
+              data.coverImage = image;
+              return data;
+            })
+          );
+          setProperty(imageItems);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -33,17 +41,38 @@ function ContactedProperty() {
     getContactedProperties();
   }, [property]);
 
+  const handleClick = (id) => {
+    navigate(`/propertyviewpage/${id}`);
+  };
+
   const buildImages = () => {
+    const indexOfLastProperty = currentPage * propertyPerPage;
+    const indexOfFirstProperty = indexOfLastProperty - propertyPerPage;
+    const currentProperties = property.slice(
+      indexOfFirstProperty,
+      indexOfLastProperty
+    );
     let imageItems =
-      images.length > 0 &&
-      images.map((imageUrl) => {
+      currentProperties.length > 0 &&
+      currentProperties.map((prop) => {
         return (
-          <Carousel.Item>
-            <img className="d-block w-100" src={imageUrl} alt="First slide" />
-            <Carousel.Caption>
-              <h3>{property.name}</h3>
-            </Carousel.Caption>
-          </Carousel.Item>
+          <Col>
+            <Card className="propertyImage">
+              <Card.Img key={prop} src={prop.coverImage} />
+              <Card.ImgOverlay className="imgOverlay">
+                <div className="text-center">
+                  <Button
+                    variant="outline-primary"
+                    size="lg"
+                    className="button"
+                    onClick={() => handleClick(prop._id)}
+                  >
+                    {prop.name}
+                  </Button>
+                </div>
+              </Card.ImgOverlay>
+            </Card>
+          </Col>
         );
       });
 
@@ -52,51 +81,36 @@ function ContactedProperty() {
 
   // Get Current Posts
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = property.slice(indexOfFirstPost, indexOfLastPost);
-  // console.log(posts);
-
   // Pagination
 
   const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(property.length / postsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(property.length / propertyPerPage); i++) {
     pageNumbers.push(i);
   }
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   if (loading) {
-    return <p>Loading</p>;
+    return (
+      <div className="spinner">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
   } else {
     return (
       <>
         <Menu />
         <br />
-        <br />
         <h1 className="text-center">Contacted Properties</h1>
         <br />
         <Row xs={1} md={2} className="propertyDiv">
-          {currentPosts.map((post) => (
-            <Col key={post._id}>
-              <Card className="propertyImage">
-                {/* <Card.Img variant="top" src={post.url} /> */}
-                {images ? buildImages() : ""}
-                <div className="text-center">
-                  <Card.ImgOverlay className="imgOverlay">
-                    <Button
-                      variant="outline-primary"
-                      size="lg"
-                      className="button"
-                    >
-                      House
-                    </Button>
-                  </Card.ImgOverlay>
-                </div>
-              </Card>
-            </Col>
-          ))}
+          {property ? (
+            buildImages()
+          ) : (
+            <Card.Img src="https://images.unsplash.com/photo-1553095066-5014bc7b7f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8d2FsbCUyMGJhY2tncm91bmR8ZW58MHx8MHx8&w=1000&q=80" />
+          )}
         </Row>
+
         <br />
         <Pagination style={{ justifyContent: "center" }}>
           {pageNumbers.map((number) => {

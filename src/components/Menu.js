@@ -50,9 +50,6 @@ function Menu() {
                 <Nav.Link href="/sellerpage" className="navtext">
                   Sell
                 </Nav.Link>
-                <Nav.Link href="/" className="navtext">
-                  Rent
-                </Nav.Link>
 
                 <NavDropdown
                   title={<span>{`Hello ${userName}`}</span>}

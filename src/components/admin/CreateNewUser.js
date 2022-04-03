@@ -28,7 +28,7 @@ function CreateNewUser() {
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       async function registerUser() {
-        const res = await authService.register(formValues);
+        const res = await authService.createNewUser(formValues);
         if (res.error) {
           setServerError({ server_error: res.error });
           setIsSubmit(false);

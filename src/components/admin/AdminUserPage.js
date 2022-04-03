@@ -20,10 +20,10 @@ function AdminUserPage() {
   // Get Current Posts
   const indexOfLastPost = currentPage * dataPerPage;
   const indexOfFirstPost = indexOfLastPost - dataPerPage;
-  let currentUserData;
+  let alltUserData;
 
   if (usersData !== null) {
-    currentUserData = usersData.user.slice(indexOfFirstPost, indexOfLastPost);
+    alltUserData = usersData.user.slice(indexOfFirstPost, indexOfLastPost);
     for (let i = 1; i <= Math.ceil(usersData.user.length / dataPerPage); i++) {
       pageNumbers.push(i);
     }
@@ -99,7 +99,7 @@ function AdminUserPage() {
                       </tr>
                     </thead>
                     <tbody>
-                      {currentUserData.map((user, index) => (
+                      {alltUserData.map((user, index) => (
                         <tr key={index}>
                           <td>{user._id}</td>
                           <td>{user.name}</td>
@@ -114,7 +114,14 @@ function AdminUserPage() {
                             </button>
                           </td>
                           <td>
-                            <button className="setButton">Update</button>
+                            <button
+                              className="setButton"
+                              onClick={() => {
+                                navigate(`/adminuserupdate/${user._id}`);
+                              }}
+                            >
+                              Update
+                            </button>
                           </td>
                           <td>
                             <button

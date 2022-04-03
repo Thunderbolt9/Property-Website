@@ -28,6 +28,7 @@ import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
 import CreateNewUser from "./components/admin/CreateNewUser";
+import UpdateUserPage from "./components/admin/UpdateUserPage";
 
 export const AuthContext = React.createContext();
 
@@ -96,7 +97,11 @@ function App() {
             />
             <Route
               path="/contactedproperties"
-              element={<ContactedProperties />}
+              element={
+                <PrivateRoute>
+                  <ContactedProperties />
+                </PrivateRoute>
+              }
             />
             <Route
               path="/proposedproperties"
@@ -120,6 +125,16 @@ function App() {
                 <PrivateRoute>
                   <AdminRoute>
                     <CreateNewUser />
+                  </AdminRoute>
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/adminuserupdate/:id"
+              element={
+                <PrivateRoute>
+                  <AdminRoute>
+                    <UpdateUserPage />
                   </AdminRoute>
                 </PrivateRoute>
               }

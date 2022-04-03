@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import "../../css/SellerPage.css";
 import Menu from "../Menu";
 import Footer from "../Footer";
+import { AuthContext } from "../../App";
+import AdminMenu from "../AdminMenu";
 
 function SellerPage() {
   const initialValues = {
@@ -25,6 +27,7 @@ function SellerPage() {
     type: "",
   };
 
+  const user = useContext(AuthContext);
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -56,8 +59,9 @@ function SellerPage() {
         try {
           setSpinner(true);
           const res = await apiService.createProperty(formValues);
+          console.log(res);
           setSpinner(false);
-          // navigate("/propertyviewpage");
+          navigate(`/`);
         } catch (err) {
           setServerError({ server_error: err.message });
           setSpinner(false);
@@ -96,7 +100,6 @@ function SellerPage() {
     setServerError(false);
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    navigate("/proposedproperties");
   };
 
   const validate = (values) => {
@@ -139,7 +142,8 @@ function SellerPage() {
 
   return (
     <>
-      <Menu />
+      {user.role === "Admin" ? <AdminMenu /> : <Menu />}
+
       <div className="sell-form-container">
         <Form onSubmit={handleSubmit} className="sell-form shadow-sm form-bg">
           <h3 className="text-center">Sell Property</h3>

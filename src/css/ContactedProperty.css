@@ -17,29 +17,28 @@
 }
 
 .button {
-  color: #75A5FF;
+  color: #75a5ff;
   width: 10rem;
   border-radius: 20rem;
 }
 
-
 @media only screen and (max-width: 500px) {
-    .propertyDiv {
-        display: flex;
-        flex-direction: column;
-        margin: auto;
-        gap: 1rem;
-      }
-    
-      .propertyImage {
-        width: 20rem;
-      }
+  .propertyDiv {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 1rem;
+  }
 
-      .imgOverlay {
-        margin-top: 6rem;
-      }
+  .propertyImage {
+    width: 20rem;
+  }
 
-      .button {
-        margin-top: 7rem;
-      }
+  .imgOverlay {
+    margin-top: 6rem;
+  }
+
+  .button {
+    margin-top: 7rem;
+  }
 }

@@ -242,6 +242,30 @@ const exportedFunctions = {
       console.log(err);
     }
   },
+
+  async getContactedProperties() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/user/getContacted`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async getProposedProperties() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/user/getOwnProperty`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
 
 export default exportedFunctions;

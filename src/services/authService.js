@@ -46,6 +46,25 @@ const authFunctions = {
     }
   },
 
+  //function to create new user from admin
+  async createNewUser(payload) {
+    try {
+      const res = await axios.post(
+        `${API_URL}/admin/createUser`,
+        payload,
+        { withCredentials: true },
+        payloadHeader
+      );
+      return res.data;
+    } catch (err) {
+      if (err.response) {
+        return err.response.data;
+      }
+      console.log(err);
+      return err.message;
+    }
+  },
+
   // function for user profile updation
   async update(payload) {
     try {
@@ -81,7 +100,7 @@ const authFunctions = {
       console.log(err);
       return err.message;
     }
-  },  
+  },
 };
 
 export default authFunctions;

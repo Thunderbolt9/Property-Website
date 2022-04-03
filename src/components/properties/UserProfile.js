@@ -7,6 +7,7 @@ import { AuthContext } from "../../App";
 import authService from "../../services/authService";
 import store from "../../redux/store";
 import { useNavigate } from "react-router";
+import AdminMenu from "../AdminMenu";
 
 export default function UserProfile() {
   const [disable, setDisable] = useState(true);
@@ -84,7 +85,8 @@ export default function UserProfile() {
 
   return (
     <div>
-      <Menu />
+      {currentUser.role === "Admin" ? <AdminMenu /> : <Menu />}
+
       <div className="formDiv">
         <Form onSubmit={handleSubmit}>
           <h4 className="text-center">User Profile</h4>
