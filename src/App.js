@@ -16,6 +16,8 @@ import PropertyViewPage from "./components/properties/PropertyViewPage";
 import AdminPropertyPage from "./components/admin/AdminPropertyPage";
 import AdminUserPage from "./components/admin/AdminUserPage";
 import AdminDashboard from "./components/admin/AdminDashboard";
+import EditPropertyPage from "./components/properties/EditPropertyPage";
+import UserProfile from "./components/properties/UserProfile";
 
 // Private and Admin Routes
 import PrivateRoute from "./components/PrivateRoute";
@@ -24,7 +26,8 @@ import AdminRoute from "./components/AdminRoute";
 import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
-import UserProfile from "./components/properties/UserProfile";
+
+
 
 export const AuthContext = React.createContext();
 
@@ -123,6 +126,14 @@ function App() {
               }
             />
             <Route
+              path="/propertyviewpage/:id"
+              element={<PropertyViewPage />}
+            />
+            <Route
+              path="/editpropertypage/:id"
+              element={<EditPropertyPage />}
+            />
+
               path="/adminpropertypage"
               element={
                 <PrivateRoute>
