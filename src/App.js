@@ -27,8 +27,6 @@ import { API_URL } from "./config";
 import axios from "axios";
 import store from "./redux/store";
 
-
-
 export const AuthContext = React.createContext();
 
 function App() {
@@ -133,8 +131,13 @@ function App() {
               path="/editpropertypage/:id"
               element={<EditPropertyPage />}
             />
-                
-             <Route
+
+            <Route exact path="/adminuserpage" element={<AdminUserPage />} />
+
+            <Route exact path="/rentpage" element={<RentPage />} />
+
+            <Route
+              exact
               path="/adminpropertypage"
               element={
                 <PrivateRoute>

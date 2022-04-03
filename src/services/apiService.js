@@ -1,4 +1,5 @@
 import axios from "axios";
+import ContactedProperty from "../components/properties/ContactedProperty";
 import { API_URL } from "../config";
 
 const instance = axios.create({
@@ -134,7 +135,18 @@ const exportedFunctions = {
   },
 
   //delete property
-  async deleteProperty() {},
+  async deleteProperty(id) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/property/remove`,
+        { id: id },
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 
   //get all users
   async getAllUsers() {
@@ -144,6 +156,52 @@ const exportedFunctions = {
         headers.jsonHeaders
       );
       return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  //getUserById
+  async getUserById(id) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/user/getUserById`,
+        {
+          id: id,
+        },
+        headers.jsonHeaders
+      );
+
+      return res.data.user;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async contactProperty(propertyId) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/property/contact`,
+        {
+          id: propertyId,
+        },
+        headers.jsonHeaders
+      );
+      console.log("contacted property", res.data);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async getContactersInfo(contactorArray) {
+    try {
+      const data = await Promise.all(
+        contactorArray.map(async (item) => {
+          return await exportedFunctions.getUserById(item);
+        })
+      );
+      return data;
     } catch (err) {
       console.log(err);
     }
