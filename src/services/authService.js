@@ -65,12 +65,11 @@ const authFunctions = {
     }
   },
 
-  async changeRole(payload) {
+  async changeRole(id) {
     try {
       const res = await axios.post(
         `${API_URL}/admin/changeRole`,
-        payload,
-        { withCredentials: true },
+        { withCredentials: true, id: id },
         payloadHeader
       );
       return res.data;
@@ -81,7 +80,7 @@ const authFunctions = {
       console.log(err);
       return err.message;
     }
-  },  
+  },
 };
 
 export default authFunctions;

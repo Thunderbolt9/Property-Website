@@ -109,6 +109,30 @@ const exportedFunctions = {
     }
   },
 
+  async getContactedProperties() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/user/getContacted`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async getProposedProperties() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/user/getOwnProperty`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   // get images from the server
   async getImages(imageArray, type) {
     try {
@@ -132,6 +156,7 @@ const exportedFunctions = {
       console.log(err);
     }
   },
+  
 
   //delete property
   async deleteProperty(id) {
@@ -165,6 +190,7 @@ const exportedFunctions = {
     try {
       const res = await instance.post(
         `${API_URL}/user/getUserById`,
+
         { id: id },
         headers.jsonHeaders
       );
