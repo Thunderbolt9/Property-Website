@@ -10,8 +10,8 @@ import RentPage from "./components/properties/RentPage";
 import Register from "./components/user/Register";
 import BuyerPage from "./components/properties/BuyerPage";
 import SellerPage from "./components/properties/SellerPage";
-import ContactedProperties from "./components/properties/ContactedProperty";
-import ProposedProperties from "./components/properties/ProposedPropertyPage";
+import ContactedProperty from "./components/properties/ContactedProperty";
+import ProposedPropertyPage from "./components/properties/ProposedPropertyPage";
 import PropertyViewPage from "./components/properties/PropertyViewPage";
 import AdminPropertyPage from "./components/admin/AdminPropertyPage";
 import AdminUserPage from "./components/admin/AdminUserPage";
@@ -91,14 +91,21 @@ function App() {
                 </PrivateRoute>
               }
             />
-
             <Route
               path="/contactedproperties"
-              element={<ContactedProperties />}
+              element={
+                <PrivateRoute>
+                  <ContactedProperty />
+                </PrivateRoute>
+              }
             />
             <Route
               path="/proposedproperties"
-              element={<ProposedProperties />}
+              element={
+                <PrivateRoute>
+                <ProposedPropertyPage />
+              </PrivateRoute>
+              }
             />
             <Route path="/propertyviewpage" element={<PropertyViewPage />} />
             <Route path="/rentpage" element={<RentPage />} />
@@ -111,6 +118,11 @@ function App() {
                   </AdminRoute>
                 </PrivateRoute>
               }
+            />
+
+            <Route
+              path="/propertyviewpage/:id"
+              element={<PropertyViewPage />}
             />
             <Route
               path="/adminuserpage"

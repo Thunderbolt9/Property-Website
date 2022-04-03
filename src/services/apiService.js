@@ -109,6 +109,30 @@ const exportedFunctions = {
     }
   },
 
+  async getContactedProperties() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/user/getContacted`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async getProposedProperties() {
+    try {
+      const res = await instance.get(
+        `${API_URL}/user/getOwnProperty`,
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
   // get images from the server
   async getImages(imageArray, type) {
     try {
@@ -132,6 +156,7 @@ const exportedFunctions = {
       console.log(err);
     }
   },
+  
 
   //delete property
   async deleteProperty() {},
@@ -144,6 +169,52 @@ const exportedFunctions = {
         headers.jsonHeaders
       );
       return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  //getUserById
+  async getUserById(id) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/user/getUserById`,
+        {
+          id: id,
+        },
+        headers.jsonHeaders
+      );
+
+      return res.data.user;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async contactProperty(propertyId) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/property/contact`,
+        {
+          id: propertyId,
+        },
+        headers.jsonHeaders
+      );
+      console.log("contacted property", res.data);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
+
+  async getContactersInfo(contactorArray) {
+    try {
+      const data = await Promise.all(
+        contactorArray.map(async (item) => {
+          return await exportedFunctions.getUserById(item);
+        })
+      );
+      return data;
     } catch (err) {
       console.log(err);
     }

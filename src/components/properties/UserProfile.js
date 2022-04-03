@@ -15,7 +15,7 @@ export default function UserProfile() {
   const [isSubmit, setIsSubmit] = useState(false);
 
   const currentUser = useContext(AuthContext);
-  // const [role, setRole] = useState(currentUser.role);
+
   const navigate = useNavigate();
 
   const initialValues = {
@@ -24,13 +24,22 @@ export default function UserProfile() {
     email: currentUser.email,
     phone: currentUser.phone,
   };
-  console.log(currentUser);
   const [formValues, setFormValues] = useState(initialValues);
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       async function updateUser() {
         const res = await authService.update(formValues);
+        if (res.error) {
+          setServerError({ server_error: res.error });
+        } else {
+          store.dispatch({
+            type: "userUpdated",
+            payload: {
+              user: res.user,
+            },
+          });
+        }
         console.log(res.error);
         if (res.error) {
           setServerError({ server_error: res.error });
@@ -38,12 +47,12 @@ export default function UserProfile() {
           store.dispatch({
             type: "userUpdated",
             payload: {
-              user: res.user
-            }
+              user: res.user,
+            },
           });
           navigate("/profile");
+        }
       }
-    }
       updateUser();
     }
   }, [formErrors]);
@@ -58,7 +67,6 @@ export default function UserProfile() {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
     setDisable(true);
-    // setRole("Admin");
   };
 
   const validate = (values) => {
@@ -98,7 +106,7 @@ export default function UserProfile() {
               isInvalid={formErrors.name ? true : false}
             />
             <Form.Control.Feedback type="invalid">
-                {formErrors.name}
+              {formErrors.name}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -113,7 +121,7 @@ export default function UserProfile() {
               isInvalid={formErrors.email ? true : false}
             />
             <Form.Control.Feedback type="invalid">
-                {formErrors.email}
+              {formErrors.email}
             </Form.Control.Feedback>
           </Form.Group>
 
@@ -128,16 +136,9 @@ export default function UserProfile() {
               isInvalid={formErrors.phone}
             />
             <Form.Control.Feedback type="invalid">
-                {formErrors.phone}
+              {formErrors.phone}
             </Form.Control.Feedback>
           </Form.Group>
-          {currentUser.role === "Normal" ? (
-            ""
-          ) : (
-            <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label="Make Admin" disabled={disable}/>
-            </Form.Group>
-          )}
 
           <Form.Group className="text-center">
             <Button
