@@ -47,7 +47,7 @@ function Register() {
       registerUser();
     }
   }, [formErrors, formValues, isSubmit, navigate]);
-  //update only when threr is change in formErrors
+  //update only when threre is change in formErrors
 
   if (currentUser) {
     return <Navigate to="/login"></Navigate>;

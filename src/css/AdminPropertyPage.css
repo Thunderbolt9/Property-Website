@@ -1,56 +1,52 @@
 .flex-container {
   display: flex;
   gap: 1.5rem;
-  margin-bottom: 4rem;
-  margin-top: 4rem;
-  flex-wrap: wrap;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
 }
 
 .setbutton {
   background-color: white;
-  border-color: #75a5ff;
+  border: 1px solid #75a5ff;
   color: #75a5ff;
   border-radius: 5rem;
-  min-width: 11rem;
+  min-width: 12rem;
   min-height: 1rem;
   margin-top: 0rem;
-
   font-weight: bold;
 }
+
 .setbutton:hover {
   background-color: #75a5ff;
   color: white;
 }
+
 .setbutton1 {
   background-color: white;
-  border-color: #75a5ff;
+  border: 1px solid #75a5ff;
   color: #75a5ff;
-  border-radius: 5rem;
-  width: 5rem;
-  height: 2rem;
+  border-radius: 2rem;
   font-weight: bold;
+  padding: 5px 10px;
 }
+
 .setbutton1:hover {
   background-color: #75a5ff;
   color: white;
 }
+
 .table {
   text-align: center;
 }
+
 .page {
   justify-content: center;
   margin: 4rem;
   margin-top: 4rem;
   margin-bottom: 4rem;
 }
+
 @media only screen and (max-width: 500px) {
-  /* .setbutton{
-         margin-top: -8rem; 
-         float:right;
-          margin-right:66em; 
-         background-color: white;
-        border-color: #75A5FF;
-    } */
   .noWrap {
     white-space: nowrap;
   }

@@ -1,18 +1,19 @@
 .headingDiv {
   display: flex;
-  gap: 2rem;
-  margin-top: 3rem;
+  gap: 1.5rem;
   margin-bottom: 3rem;
+  margin-top: 3rem;
 }
 
 .createUserButton {
-  color: #75a5ff;
-  border: 1px solid #75a5ff;
   background-color: white;
+  border: 1px solid #75a5ff;
+  color: #75a5ff;
   border-radius: 5rem;
-  font-weight: 700;
-  padding-left: 10px;
-  padding-right: 10px;
+  min-width: 11rem;
+  min-height: 1rem;
+  margin-top: 0rem;
+  font-weight: bold;
 }
 
 .createUserButton:hover {
@@ -20,8 +21,21 @@
   color: white;
 }
 
+.setButton {
+  background-color: white;
+  border: 1px solid #75a5ff;
+  color: #75a5ff;
+  border-radius: 2rem;
+  font-weight: bold;
+  padding: 5px 10px;
+}
+
+.setButton:hover {
+  background-color: #75a5ff;
+  color: white;
+}
+
 .userTable {
-  white-space: nowrap;
   text-align: center;
 }
 
