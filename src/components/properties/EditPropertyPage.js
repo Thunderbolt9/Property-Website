@@ -70,7 +70,7 @@ function EditPropertyPage() {
       setLoading(false);
     }
     getPropertyById();
-  }, [id, formValues, isSubmit]);
+  }, []);
 
   // Form data avaialble here
   useEffect(() => {
@@ -93,7 +93,7 @@ function EditPropertyPage() {
       updateProperty();
     }
     // update only when there is change in formerrors
-  }, [formErrors, formValues, isSubmit]);
+  }, [formErrors]);
 
   const handleFile = (refname) => {
     if (refname === "fileone") {

@@ -71,7 +71,7 @@ function SellerPage() {
       createProperty();
     }
     // update only when there is change in formerrors
-  }, [formErrors, formValues, isSubmit, navigate]);
+  }, [formErrors]);
 
   const handleFile = (refname) => {
     if (refname === "fileone") {
