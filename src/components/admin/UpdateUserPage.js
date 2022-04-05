@@ -3,7 +3,6 @@ import Footer from "../Footer";
 import { Form, Button } from "react-bootstrap";
 import "../../css/UserProfile.css";
 import authService from "../../services/authService";
-import store from "../../redux/store";
 import { useNavigate, useParams } from "react-router";
 import AdminMenu from "../AdminMenu";
 import apiService from "../../services/apiService";
@@ -14,27 +13,34 @@ export default function UpdateUserPage() {
   const [formErrors, setFormErrors] = useState({});
   const [serverError, setServerError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-
-  console.log(serverError);
+  const [makeAdmin, serMakeAdmin] = useState(false);
+  const [getUserInfoById, setUserInfoById] = useState(null);
 
   const navigate = useNavigate();
 
   const [formValues, setFormValues] = useState(null);
 
   useEffect(() => {
-    if (Object.keys(formErrors).length === 0 && isSubmit) {
-      async function updateUser() {
-        const res = await authService.update(formValues);
-        console.log(res.error);
-        if (res.error) {
-          setServerError({ server_error: res.error });
+    async function updateUser() {
+      const res = await authService.update(formValues);
+
+      if (res.error) {
+        setServerError({ server_error: res.error });
+      } else {
+        if (makeAdmin === true) {
+          const res = await apiService.changeRole(id);
+          navigate("/adminuserpage");
         } else {
+          const res = await apiService.changeRole(id);
           navigate("/adminuserpage");
         }
       }
+    }
+
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
       updateUser();
     }
-  }, [formErrors, formValues, isSubmit, navigate]);
+  }, [isSubmit]);
 
   useEffect(() => {
     async function getUserById() {
@@ -54,7 +60,7 @@ export default function UpdateUserPage() {
     }
 
     getUserById();
-  }, [id]);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,7 +72,7 @@ export default function UpdateUserPage() {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
     setDisable(true);
-    // setRole("Admin");
+    serMakeAdmin(!makeAdmin);
   };
 
   const validate = (values) => {

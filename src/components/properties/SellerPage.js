@@ -61,7 +61,11 @@ function SellerPage() {
           const res = await apiService.createProperty(formValues);
           console.log(res);
           setSpinner(false);
-          navigate(`/`);
+          if (user !== null && user.role === "Admin") {
+            navigate(`/admindashboard`);
+          } else {
+            navigate(`/`);
+          }
         } catch (err) {
           setServerError({ server_error: err.message });
           setSpinner(false);

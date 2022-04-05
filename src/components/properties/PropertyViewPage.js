@@ -12,6 +12,7 @@ import { AuthContext } from "../../App";
 import Modal from "react-bootstrap/Modal";
 import apiService from "../../services/apiService";
 import Menu from "../Menu";
+import AdminMenu from "../AdminMenu";
 
 function PropertyViewPage() {
   const user = useContext(AuthContext);
@@ -124,7 +125,8 @@ function PropertyViewPage() {
   } else {
     return (
       <>
-        <Menu />
+        {user !== null && user.role === "Admin" ? <AdminMenu /> : <Menu />}
+
         <Container className="container-main mt-5">
           <Row>
             <Col className="justify-content-between">

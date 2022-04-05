@@ -107,7 +107,14 @@ function App() {
               path="/proposedproperties"
               element={<ProposedProperties />}
             />
-            <Route path="/propertyviewpage" element={<PropertyViewPage />} />
+            <Route
+              path="/propertyviewpage"
+              element={
+                <PrivateRoute>
+                  <PropertyViewPage />
+                </PrivateRoute>
+              }
+            />
             <Route path="/rentpage" element={<RentPage />} />
             <Route
               path="/admindashboard"

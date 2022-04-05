@@ -8,9 +8,11 @@ import { useParams } from "react-router-dom";
 import { AuthContext } from "../../App";
 import Menu from "../Menu";
 import AdminMenu from "../AdminMenu";
+import { useNavigate } from "react-router-dom";
 
 function EditPropertyPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const initialValues = {
     name: "",
@@ -84,6 +86,11 @@ function EditPropertyPage() {
             formValues._id
           );
           console.log(res);
+          if (user !== null && user.role === "Admin") {
+            navigate("/adminpropertypage");
+          } else {
+            navigate("/");
+          }
         } catch (err) {
           setServerError({ server_error: err.message });
           setSpinner(false);

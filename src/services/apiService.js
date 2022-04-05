@@ -266,6 +266,20 @@ const exportedFunctions = {
       console.log(err);
     }
   },
+
+  //getUserById
+  async changeRole(id) {
+    try {
+      const res = await instance.post(
+        `${API_URL}/admin/changeRole`,
+        { id: id },
+        headers.jsonHeaders
+      );
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };
 
 export default exportedFunctions;
