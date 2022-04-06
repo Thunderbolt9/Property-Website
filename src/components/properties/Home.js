@@ -5,51 +5,12 @@ import { Container } from "react-bootstrap";
 import "../../css/Home.css";
 import Footer from "../Footer";
 import Menu from "../Menu";
-// import apiService from "../../services/apiService";
 
 function Home() {
   const navigate = useNavigate();
-  // const [images, setImages] = useState(null);
   const [recentProperties, setRecentProperties] = useState(null);
-  // const [serverError, setServerError] = useState(false);
 
   console.log(recentProperties);
-
-  // async function getRecentProperties() {
-  //   try {
-  //     const res = await apiService.getRecentProperties();
-  //     console.log(res.Properties[0].images);
-
-  //     const imgUrl1 = await apiService.getImages(
-  //       res.Properties[0].images,
-  //       "Url"
-  //     );
-
-  //     const imgUrl2 = await apiService.getImages(
-  //       res.Properties[1].images,
-  //       "Url"
-  //     );
-
-  //     console.log(imgUrl1);
-  //     setRecentProperties({
-  //       property1: {
-  //         propId: res.Properties[0]._id,
-  //         imageUrl: res.Properties[0].images,
-  //       },
-  //       property2: {
-  //         propId: res.Properties[1]._id,
-  //         imageUrl: res.Properties[1].images,
-  //       },
-  //     });
-  //     setServerError(false);
-  //   } catch (err) {
-  //     setServerError({ server_error: err.message });
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getRecentProperties();
-  // }, []);
 
   return (
     <>
@@ -159,28 +120,15 @@ function Home() {
       </div>
 
       {/* Latest Properties */}
-      <div>
-        <h3 className="latestPropertyText">Latest Properties</h3>
-        <div className="latestPropertyDiv">
-          <img
-            alt="property"
-            className="latestPropertyImage"
-            src={`https://images.ctfassets.net/3s5io6mnxfqz/2IW4MOaC7MJObCYclek03J/b6b6f6d963f0413559d9677c50ee3a49/what-is-a-studio-apartment.jpeg?fm=jpg&w=900&fl=progressive`}
-          />
-          <img
-            alt="property"
-            className="latestPropertyImage"
-            src={`https://images.ctfassets.net/3s5io6mnxfqz/2IW4MOaC7MJObCYclek03J/b6b6f6d963f0413559d9677c50ee3a49/what-is-a-studio-apartment.jpeg?fm=jpg&w=900&fl=progressive`}
-          />
-        </div>
-        <p
-          className="text-primary text-center latestPropertyLink"
+      <div className="text-center">
+        <button
+          className="latestPropertyLink"
           onClick={() => {
             navigate("/buyerpage");
           }}
         >
-          {"Explore more >"}
-        </p>
+          Explore more
+        </button>
       </div>
       <Footer />
     </>

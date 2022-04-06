@@ -34,10 +34,12 @@ function BuyerPage() {
     if (value) {
       try {
         const filtertedProporties = posts.filter((x) => x.type.includes(value));
-        if (filtertedProporties.length > 0) {
-          setFilter(filtertedProporties);
-        } else {
+        if (filtertedProporties.length === 0 && value !== "All Properties") {
+          setFilter([]);
+        } else if (value === "All Properties") {
           setFilter(posts);
+        } else {
+          setFilter(filtertedProporties);
         }
       } catch (err) {
         console.log(err.message);
@@ -70,7 +72,7 @@ function BuyerPage() {
           setFilter(imageItems);
         }
       } catch (err) {
-        console.log(err);
+        console.log(err.message);
       }
     }
     fetchPosts();
@@ -80,8 +82,7 @@ function BuyerPage() {
     navigate(`/propertyviewpage/${id}`);
   };
 
-  //DISPLAYING CURRRENT POSTS----->
-
+  //DISPLAYING CURRRENT POSTS
   const LastPostIndex = currentPage * postsPerPage;
   const FirstPostIndex = LastPostIndex - postsPerPage;
   const currentPosts = filteredPosts.slice(FirstPostIndex, LastPostIndex);
@@ -95,7 +96,6 @@ function BuyerPage() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    //jsx code----->
     <>
       <Menu />
       <Container className="display-flex">
@@ -113,7 +113,7 @@ function BuyerPage() {
                         value={flatType}
                         onChange={onChangeFlatType}
                       >
-                        <option>All Proporties</option>
+                        <option>All Properties</option>
                         <option value="1 BHK">1 BHK</option>
                         <option value="2 BHK">2 BHK</option>
                         <option value="3 BHK">3 BHK</option>
@@ -157,6 +157,7 @@ function BuyerPage() {
             )}
           </Row>
         </div>
+
         <Pagination className="page">
           {pageNumbers.map((number) => {
             return (

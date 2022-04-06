@@ -33,7 +33,7 @@ function AdminMenu() {
     <Navbar className="navbarBg" expand="lg">
       <Container>
         <Navbar.Brand href="/" className="logo" style={{ color: "#75a5ff" }}>
-          Property World
+          Property <span style={{ color: "#002B73" }}>World</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Footer from "../Footer";
 import { Form, Button } from "react-bootstrap";
 import "../../css/UserProfile.css";
@@ -6,15 +6,18 @@ import authService from "../../services/authService";
 import { useNavigate, useParams } from "react-router";
 import AdminMenu from "../AdminMenu";
 import apiService from "../../services/apiService";
+import { AuthContext } from "../../App";
 
 export default function UpdateUserPage() {
   const { id } = useParams();
+  const currentUser = useContext(AuthContext);
+  console.log(currentUser);
   const [disable, setDisable] = useState(true);
   const [formErrors, setFormErrors] = useState({});
   const [serverError, setServerError] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
-  const [makeAdmin, serMakeAdmin] = useState(false);
-  const [getUserInfoById, setUserInfoById] = useState(null);
+  const [makeAdmin, setMakeAdmin] = useState(false);
+  const [specificUser, setSpecificUser] = useState(null);
 
   const navigate = useNavigate();
 
@@ -28,10 +31,10 @@ export default function UpdateUserPage() {
         setServerError({ server_error: res.error });
       } else {
         if (makeAdmin === true) {
-          const res = await apiService.changeRole(id);
+          const res = await apiService.changeRole(id, "Admin");
           navigate("/adminuserpage");
         } else {
-          const res = await apiService.changeRole(id);
+          const res = await apiService.changeRole(id, "Normal");
           navigate("/adminuserpage");
         }
       }
@@ -47,6 +50,7 @@ export default function UpdateUserPage() {
       try {
         const res = await apiService.getUserById(id);
         console.log(res);
+        setSpecificUser(res);
         setFormValues({
           id: res.user._id,
           name: res.user.name,
@@ -72,7 +76,6 @@ export default function UpdateUserPage() {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
     setDisable(true);
-    serMakeAdmin(!makeAdmin);
   };
 
   const validate = (values) => {
@@ -148,12 +151,32 @@ export default function UpdateUserPage() {
               </Form.Control.Feedback>
             </Form.Group>
 
+            {/* setMakeAdmin */}
             <Form.Group className="mb-3">
-              <Form.Check
-                type="checkbox"
-                label="Make Admin"
-                disabled={disable}
-              />
+              {specificUser !== null &&
+              specificUser.user._id !== currentUser._id ? (
+                <>
+                  {specificUser.user.role === "Admin" ? (
+                    <Form.Check
+                      type="checkbox"
+                      label="Remove From Admin"
+                      disabled={disable}
+                      onClick={() => {
+                        setMakeAdmin(false);
+                      }}
+                    />
+                  ) : (
+                    <Form.Check
+                      type="checkbox"
+                      label="Make Admin"
+                      disabled={disable}
+                      onClick={() => {
+                        setMakeAdmin(true);
+                      }}
+                    />
+                  )}
+                </>
+              ) : null}
             </Form.Group>
 
             <Form.Group className="text-center">

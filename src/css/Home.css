@@ -120,10 +120,19 @@
 }
 
 .latestPropertyLink {
-  font-size: 1.2rem;
-  margin-top: 2rem;
-  margin-bottom: 7rem;
+  font-size: 1.4rem;
+  color: #75a5ff;
+  background-color: white;
+  border: 1px solid #75a5ff;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
   cursor: pointer;
+}
+
+.latestPropertyLink:hover {
+  color: white;
+  background-color: #75a5ff;
+  border: 1px solid #75a5ff;
 }
 
 @media only screen and (max-width: 500px) {

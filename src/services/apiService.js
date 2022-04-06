@@ -268,11 +268,11 @@ const exportedFunctions = {
   },
 
   //getUserById
-  async changeRole(id) {
+  async changeRole(id, role) {
     try {
       const res = await instance.post(
         `${API_URL}/admin/changeRole`,
-        { id: id },
+        { id: id, role: role },
         headers.jsonHeaders
       );
       return res.data;

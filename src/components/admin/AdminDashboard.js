@@ -144,7 +144,13 @@ function AdminDashboard() {
                 </Row>
               </Container>
 
-              <Container style={{ marginTop: "4rem", textAlign: "Center" }}>
+              <Container
+                style={{
+                  marginTop: "4rem",
+                  textAlign: "Center",
+                  marginBottom: "4rem",
+                }}
+              >
                 <Row>
                   <Col>
                     <h4 className="mb-3">Users Information</h4>
@@ -162,39 +168,6 @@ function AdminDashboard() {
                       <Tooltip />
                     </PieChart>
                   </Col>
-                  <Col sm={8}>
-                    <h4>Most Contacted</h4>
-                    <Table striped bordered hover className="mt-3 noWrap">
-                      <thead>
-                        <tr>
-                          <th>Property Id</th>
-                          <th>Property Name</th>
-                          <th>City</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {mostContacted.map((property, index) => (
-                          <tr key={index}>
-                            <td>{property._id}</td>
-                            <td>{property.name}</td>
-                            <td>{property.city}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </Table>
-                  </Col>
-                </Row>
-              </Container>
-
-              <Container
-                style={{
-                  marginTop: "4rem",
-                  textAlign: "Center",
-                  marginBottom: "4rem",
-                }}
-              >
-                <Row>
-                  <Col></Col>
                   <Col sm={8}>
                     <h4>Recently Created</h4>
                     <Table striped bordered hover className="mt-3 noWrap">
@@ -218,6 +191,18 @@ function AdminDashboard() {
                   </Col>
                 </Row>
               </Container>
+
+              {/* <Container
+                style={{
+                  marginTop: "4rem",
+                  textAlign: "Center",
+                  marginBottom: "4rem",
+                }}
+              >
+                <Row></Row>
+              </Container>
+              */}
+
               <Footer />
             </>
           ) : (
@@ -230,3 +215,27 @@ function AdminDashboard() {
 }
 
 export default AdminDashboard;
+
+{
+  /* <Col sm={8}>
+                    <h4>Most Contacted</h4>
+                    <Table striped bordered hover className="mt-3 noWrap">
+                      <thead>
+                        <tr>
+                          <th>Property Id</th>
+                          <th>Property Name</th>
+                          <th>City</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {mostContacted.map((property, index) => (
+                          <tr key={index}>
+                            <td>{property._id}</td>
+                            <td>{property.name}</td>
+                            <td>{property.city}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  </Col> */
+}
